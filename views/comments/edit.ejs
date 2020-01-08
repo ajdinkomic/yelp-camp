@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+<div class="container offset-from-top">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Edit Comment</h1>
+        </div>
+        <div class="col-md-6 offset-md-3 text-center mt-5">
+                <form action="/campgrounds/<%= campground_id %>/comments/<%=comment._id%>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" value="<%=comment.text%>" name="comment[text]">
+                </div>
+                <!-- this comment[text] is better cause we can use campground.comment and it will have comment.text and comment.author -->
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit!</button>
+                </div>
+            </form>
+        <a href="/campgrounds">All Campgrounds</a>
+    </div>
+    </div>
+</div>
+<% include ../partials/footer %>

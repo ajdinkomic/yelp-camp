@@ -1,0 +1,76 @@
+<% include ./partials/header %>
+<div class="container offset-from-top">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Sign Up</h1>
+        </div>
+        <div class="col-md-6 offset-md-3 mb-5 mt-3">
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label for="username">Username *</label>
+                    <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input class="form-control" type="text" name="firstName" id="firstName" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input class="form-control" type="text" name="lastName" id="lastName" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail *</label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="email@example.com" required>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" title="Make your e-mail visible so others could contact you"
+                        id="shareEmail" name="shareEmail" value="share" type="checkbox">
+                    <label class="form-check-label" for="shareEmail">
+                        <small>Share my e-mail with others</small>
+                    </label>
+                </div>
+                <h4 class="mt-5">Additional Information (Optional)</h4>
+                <p><em>NOTE: All information provided in this section will be publicly accessible!</em></p>
+                <div class="form-group">
+                    <label for="profilePhoto">Profile Photo</label>
+                    <input type="text" class="form-control" id="profilePhoto" pattern="^https:\/\/.*"
+                        placeholder="https://imageurl.com/..." name="profilePhoto">
+                </div>
+                <div class="form-group">
+                    <label for="facebook">Facebook Link</label>
+                    <input type="text" class="form-control" id="facebook" pattern="^https:\/\/facebook.com\/.*"
+                        placeholder="https://facebook.com/..." name="facebook">
+                </div>
+                <div class="form-group">
+                    <label for="youtube">Youtube Link</label>
+                    <input type="text" class="form-control" id="youtube" pattern="^https:\/\/youtube.com\/channel\/.*"
+                        placeholder="https://youtube.com/channel/..." name="youtube">
+                </div>
+                <div class="form-group">
+                    <label for="twitter">Twitter Link</label>
+                    <input type="text" class="form-control" id="twitter" pattern="^https:\/\/twitter.com\/.*"
+                        placeholder="https://twitter.com/..." name="twitter">
+                </div>
+                <div class="form-group">
+                    <label for="linkedIn">LinkedIn Link</label>
+                    <input type="text" class="form-control" id="linkedIn" pattern="^https:\/\/linkedin.com\/.*"
+                        placeholder="https://linkedin.com/..." name="linkedIn">
+                </div>
+                <div class="form-group">
+                    <label for="email">Have an Admin Code?</label>
+                    <input class="form-control" type="password" name="adminCode" placeholder="Admin Code">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button>
+                </div>
+            </form>
+            <a href="/campgrounds">All Campgrounds</a>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>

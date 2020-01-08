@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YelpCamp</title>
+  <!-- Bootstrap 4 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Font Awesome 5.11.2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,700&display=swap&subset=latin-ext"
+    rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/stylesheets/landing.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <a class="navbar-brand my-1" href="/">YelpCamp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link btn btn-custom btn-no-border ml-lg-2 my-1" href="/campgrounds">Home</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <% if(!currentUser){ %>
+        <li class="nav-item"><a class="nav-link btn btn-custom btn-no-border ml-lg-2 my-1" href="/login"><i
+              class="fas fa-user mr-1"></i> Log In</a></li>
+        <li class=" nav-item"><a class="nav-link btn btn-custom btn-no-border px-lg-3 ml-lg-2 my-1" href="/register"><i
+              class="fas fa-user-plus mr-1"></i> Sign Up</a>
+        </li>
+        <% } else { %>
+        <li class=" nav-item"><a class="nav-link btn btn-custom px-lg-3 btn-no-border mr-lg-2 my-1"
+            href="/campgrounds/new">+ New</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
+            id="navbarDropdownNotification" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Notifications <span class="badge"><%= notifications.length %></span>
+          </a>
+          <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownNotification">
+            <% notifications.forEach(function(notification){ %>
+            <a class="dropdown-item btn btn-custom btn-no-border"
+              href="/notifications/<%=notification.id%>"><%=notification.username%> created a new
+              campground.</a>
+            <% }); %>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item btn btn-custom btn-fill" href="/notifications">View past
+              notifications</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mr-lg-2 my-1" href="#" id="navbarDropdown"
+            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="<%=currentUser.profilePhoto%>" class="user-profile-photo-nav mr-1" alt="User profile photo.">
+            <%= currentUser.username %>
+          </a>
+          <div class="dropdown-menu user-dropdown bg-dark px-2" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item btn btn-custom btn-no-border" href="/users/<%=currentUser.id%>">Go to
+              profile</a>
+            <a class="dropdown-item btn btn-custom btn-no-border" href="#">Edit profile information</a>
+            <a class="dropdown-item btn btn-custom btn-no-border" href="/logout">Logout</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item btn btn-custom btn-fill" href="/campgrounds/new">Add new campground</a>
+          </div>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container flashalert mt-1 text-center p-0">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <% if(errorMessage && errorMessage.length > 0){ %>
+        <!-- empty array isn't false so we need to make sure message does exist and it isn't an empty array (its length so must be > 0) -->
+        <div class="alert alert-danger" role="alert"><%= errorMessage %></div>
+        <% } %>
+        <% if(successMessage && successMessage.length > 0){ %>
+        <!-- empty array isn't false so we need to make sure message does exist and it isn't an empty array (its length so must be > 0) -->
+        <div class="alert alert-success" role="alert"><%= successMessage %></div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <header id="landing-header">
+    <div class="container-fluid">
+      <div class="row justify-content-center align-items-center m-0 text-center">
+        <div class="col-md-12">
+          <h1 class="mb-4">YelpCamp</h1>
+          <p class="mb-4">Your next <span class="adventure">adventure</span> starts here</p>
+          <a href="/campgrounds" class="btn btn-custom btn-lg btn-fill">All Campgrounds</a>
+          <a href="/register" class="btn btn-custom btn-lg btn-greenish-full">Sign Up</a>
+        </div>
+      </div>
+  </header>
+
+  <section class="landing-content container">
+    <div class="row frame-row bg-white justify-content-center">
+      <div class="col-md-8 text-center">
+        <h2>Welcome to YelpCamp, the right place to find your ideal campground</h2>
+        <p>Join our community and post your campground and leave reviews on other ones or explore campgrounds without
+          registration</p>
+        <a href="/campgrounds" class="btn btn-custom btn-lg btn-start btn-greenish-full">Start Exploring</a>
+      </div>
+    </div>
+    <div class="row frame-row bg-white justify-content-center mt-5">
+      <div class="col-md-10 text-center">
+        <div class="container-fluid">
+          <div class="row py-5 landing-icons-row">
+            <div class="col-md-6 p-4 p-md-5"><i class="fas fa-2x fa-campground"></i>
+              <div class="number my-3">
+                <h1>150</h1>
+              </div>
+              <h6>CAMPGROUNDS</h6>
+            </div>
+            <div class="col-md-6 p-4 p-md-5"><i class="fas fa-2x fa-user"></i>
+              <div class="number my-3">
+                <h1>150</h1>
+              </div>
+              <h6>USERS</h6>
+            </div>
+            <div class="col-md-6 p-4 p-md-5"><i class="fas fa-2x fa-comments"></i>
+              <div class="number my-3">
+                <h1>150</h1>
+              </div>
+              <h6>REVIEWS</h6>
+            </div>
+            <div class="col-md-6 p-4 p-md-5"><i class="fas fa-2x fa-user-plus"></i>
+              <div class="number my-3">
+                <h1>1M+</h1>
+              </div>
+              <h6>REASONS TO JOIN</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sign-up-section py-5">
+    <div class="container-fluid">
+      <div class="row m-0 justify-content-center align-items-center">
+        <div class="col-md-12 text-center">
+          <h2>SIGN UP TODAY</h2>
+          <p class="my-3">start posting campgrounds, leaving reviews and make your next vacation unforgettable</p>
+          <a href="/register" class="btn btn-custom btn-lg btn-fill">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer mt-auto py-3 bg-dark text-center">
+    <div class="container">
+      <span class="text-muted">&copy; YelpCamp 2019 | <a href="/campgrounds">Home</a> | <a href="/campgrounds/new">New
+          Campground</a></span>
+    </div>
+  </footer>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS CDN -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+  <script>
+    $(function () {
+      $(window).scroll(function () {
+        if ($(this).scrollTop() < 130 && !$("nav").hasClass("scrolled")) {
+          $("nav").removeClass("bg-dark");
+        } else {
+          $("nav").addClass("bg-dark");
+        }
+      });
+      $(".navbar-toggler").on("click touch", function () {
+        $("nav").toggleClass("scrolled");
+      });
+    });
+  </script>
+</body>
+
+</html>

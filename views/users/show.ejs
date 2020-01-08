@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+<div class="container offset-from-top">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <img src="<%=user.profilePhoto%>" alt="<%= user.username %> profile photo."
+                style="width: 300px; height: 300px; border-radius: 100%;">
+            <h2><%=user.firstName + " " + user.lastName%></h2>
+            <ul class="user-links p-0">
+                <% if(user.facebook !== "") { %>
+                <a href="<%= user.facebook %>" target="_blank" rel="noopener noreferrer"><i
+                        class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
+                <% } %>
+                <% if(user.youtube !== "") { %>
+                <a href="<%= user.youtube %>" target="_blank" rel="noopener noreferrer"><i
+                        class="fa fa-2x fa-youtube-play" aria-hidden="true"></i></a>
+                <% } %>
+                <% if(user.twitter !== "") { %>
+                <a href="<%= user.twitter %>" target="_blank" rel="noopener noreferrer"><i
+                        class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
+                <% } %>
+                <% if(user.linkedIn !== "") { %>
+                <a href="<%= user.linkedIn %>" target="_blank" rel="noopener noreferrer"><i
+                        class="fa fa-2x fa-linkedin-square" aria-hidden="true"></i></a>
+                <% } %>
+            </ul>
+            <!-- <% if(user.shareEmail) { %>
+                    <h3><%= user.email %></h3>
+                    <% } %> -->
+            <% if(currentUser && currentUser !== user) { %><a href="/follow/<%= user.id %>"><button class="btn btn-primary">Follow <%= user.username %></button></a><% } %>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h2><%= user.firstName %>'s Campgrounds</h2>
+            <div class="row">
+                <% campgrounds.forEach(function(campground){ %>
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="<%= campground.image %>" class="card-img-top" alt="<%=campground.name%> image.">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= campground.name %></h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the
+                                card's content.</p>
+                            <!-- campground.id instead of campground._id is getter method and it returns id as a string and it is good for using string inside of string but we may use both-->
+                            <a href="/campgrounds/<%= campground.id %>" class="btn btn-primary card-text">More info</a>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>
