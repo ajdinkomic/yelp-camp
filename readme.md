@@ -1,19 +1,33 @@
-REST (Representational State Transfer) - a mapping between HTTP routes and CRUD
+# YelpCamp
+### Working App on: [yelp-camp-ajdin](http://yelp-camp-ajdin.herokuapp.com)
 
-BLOG:
+### Description
+This is a web application for exploring campgrounds around the world, based on Colt Steele's [*The Web Developer Bootcamp*](https://www.udemy.com/course/the-web-developer-bootcamp/) course on Udemy.
 
-CREATE  /newBlog
-READ    /allBlogs
-UPDATE  /updateBlog/:id
-DESTROY /destroyBlog/:id
+### Information
+**Details:** Unregistered users can explore campgrounds, view information about specific campgrounds and their reviews. They can also view user profiles.
+After registration, users can post new campgrounds, leave reviews on other users' campgrounds and follow other users as well. When a user posts a new campground, all his followers get notified.
 
+**Tools and technologies used:** Node.js, Express.js, MongoDB, MongoDB Atlas, HTML5, CSS3, Git, Heroku, Cloudinary.
 
-Name            Path            HTTPVerb            Purpose
----------------------------------------------------------------------
-Index           /dogs           GET                 List all dogs
-New             /dogs/new       GET                 Show new dog form
-Create          /dogs           POST                Create new dog, then redirect somewhere
-Show            /dogs/:id       GET                 Show info about one specific dog
-Edit            /dogs/:id/edit  GET                 Show edit form for one dog
-Update          /dogs/:id       PUT                 Update a particular dog, then redirect somewhere
-Delete          /dogs/:id       DELETE              Delete a particular dog, then redirect somewhere
+**Landing page design:** based on template by [HTML5UP](https://html5up.net/alpha).
+
+### Features
+**Implemented Features:**
+- Login / Sign Up
+- Admin role
+- Password reset
+- In app notifications
+- Add, delete, edit campgrounds
+- Campground search
+- Image upload with multer and Cloudinary
+- Campground slugs
+- Follow user
+- Campground reviews
+
+**Features To Implement:**
+- ~~Campground reviews~~
+- Image gallery
+- Messages
+- AJAX features
+- Favorite
