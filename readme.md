@@ -30,3 +30,4 @@ After registration, users can post new campgrounds, leave reviews on other users
 - Image gallery
 - Messages
 - AJAX features
+- Favorite
