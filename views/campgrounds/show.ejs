@@ -30,7 +30,7 @@
                         <p class="card-text mb-5"><%= campground.description %></p>
                     <p class="card-text float-right">
                         <small><em>Submitted by <a
-                                href="/users/<%=campground.author.id%>"><%= campground.author.username %></a>,
+                                href="/users/<%=campground.author.username%>"><%= campground.author.username %></a>,
                             <%= moment(campground.createdAt).fromNow() %></em></small>
                         </p>
                     

@@ -5,9 +5,9 @@ var express = require("express"),
     Campground = require("../models/campground"),
     Notification = require("../models/notification"),
     async = require("async"),
-    nodemailer = require("nodemailer"),
-    crypto = require("crypto"),
-    middleware = require("../middleware");
+        nodemailer = require("nodemailer"),
+        crypto = require("crypto"),
+        middleware = require("../middleware");
 
 // LANDING PAGE
 router.get("/", function (req, res) {
@@ -81,9 +81,11 @@ router.get("/logout", function (req, res) {
 });
 
 // user profile
-router.get("/users/:id", async function (req, res) {
+router.get("/users/:username", async function (req, res) {
     try {
-        let user = await User.findById(req.params.id).populate("followers").exec();
+        let user = await User.findOne({
+            username: req.params.username
+        }).populate("followers").exec();
         Campground.find().where("author.id").equals(user._id).exec(function (err, campgrounds) {
             if (err) {
                 req.flash("error", "Campgrounds not found!");
@@ -101,13 +103,15 @@ router.get("/users/:id", async function (req, res) {
 });
 
 // follow user
-router.get("/follow/:id", middleware.isLoggedIn, async function (req, res) {
+router.get("/follow/:username", middleware.isLoggedIn, async function (req, res) {
     try {
-        let user = await User.findById(req.params.id);
+        let user = await User.findOne({
+            username: req.params.username
+        });
         user.followers.push(req.user._id);
         user.save();
         req.flash("success", "Successfully followed " + user.username);
-        res.redirect("/users/" + req.params.id);
+        res.redirect("/users/" + req.params.username);
     } catch (err) {
         req.flash("error", err.message);
         res.redirect("back");
