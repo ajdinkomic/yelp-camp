@@ -34,9 +34,14 @@
                                 <a href="/campgrounds/<%= campground.slug %>"><img src="<%= campground.image %>"
                                         class="card-img-top" alt="<%=campground.name%> image."></a>
                                 <div class="card-body">
-                                    <h5 class="card-title"><%= campground.name %></h5>
-                                    <p class="card-text"><%= campground.description.substring(0,100)+"..." %></p>
-
+                                    <h5 class="card-title"><%= campground.name.substring(0,40) %></h5>
+                                    <ul class="list-group list-group-flush">
+                                            <li class="list-group-item border-top-0"><p class="card-text"><i class="fas fa-info-circle mr-1"></i><%= campground.description.substring(0, 40)+"..." %></p>
+                                            </li>
+                                            <li class="list-group-item"><i class="fas fa-user mr-1"></i><%= campground.author.username %></li>
+                                            <li class="list-group-item"><i class="fas fa-calendar mr-1"></i><%= campground.createdAt.toDateString() %></li>
+                                          </ul>
+                                    
                                     <% if (campground.rating === 0) { %>
                                     <div class="card-text text-center"><em>No reviews yet</em></div>
                                     <% } else { %>

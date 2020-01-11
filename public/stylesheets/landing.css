@@ -24,6 +24,16 @@ footer a:hover {
   color: #4eb980;
 }
 
+.flashalert {
+  position: absolute;
+  top: 0.3rem;
+  z-index: 2;
+}
+
+.alert{
+  border-radius: 0;
+}
+
 nav {
   transition: all 0.4s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);

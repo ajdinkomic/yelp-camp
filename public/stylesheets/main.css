@@ -224,6 +224,10 @@ small, small:focus{
   height: 250px;
 }
 
+.all-campgrounds-container .list-group-item {
+  padding: 1rem 0;
+}
+
 /*=======================================
               CAMPGROUND/SHOW
 ========================================*/

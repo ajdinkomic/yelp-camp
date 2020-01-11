@@ -10,24 +10,26 @@ After registration, users can post new campgrounds, leave reviews on other users
 
 **Tools and technologies used:** Node.js, Express.js, MongoDB, MongoDB Atlas, HTML5, CSS3, Git, Heroku, Cloudinary.
 
-**Landing page design:** based on template by [HTML5UP](https://html5up.net/alpha).
+**Landing page design:** based on a template by [HTML5UP](https://html5up.net/alpha).
 
 ### Features
 **Implemented Features:**
 - Login / Sign Up
 - Admin role
 - Password reset
-- In app notifications
+- Email sending using Nodemailer
 - Add, delete, edit campgrounds
 - Campground search
-- Image upload with multer and Cloudinary
+- Image upload using Multer and Cloudinary
 - Campground slugs
 - Follow user
 - Campground reviews
+- In app notifications
 
 **Features To Implement:**
 - ~~Campground reviews~~
+- ~~In app notifications~~
 - Image gallery
 - Messages
 - AJAX features
-- Favorite
+- Favorite Campgrounds
