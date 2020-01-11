@@ -8,7 +8,9 @@ var express = require("express"),
 
 // Reviews index
 router.get("/", function (req, res) {
-  Campground.findOne({slug: req.params.slug}).populate({
+  Campground.findOne({
+    slug: req.params.slug
+  }).populate({
     path: "reviews",
     options: {
       sort: {
@@ -29,7 +31,9 @@ router.get("/", function (req, res) {
 // Reviews new
 router.get("/new", middleware.isLoggedIn, middleware.checkReviewExistence, function (req, res) {
   // middleware.checkReviewExistence checks if a user already reviewed the campground, only one review per user is allowed
-  Campground.findOne({slug: req.params.slug}, function (err, campground) {
+  Campground.findOne({
+    slug: req.params.slug
+  }, function (err, campground) {
     if (err || !campground) {
       req.flash("error", err.message);
       return res.redirect("back");
@@ -42,7 +46,9 @@ router.get("/new", middleware.isLoggedIn, middleware.checkReviewExistence, funct
 
 // Reviews create
 router.post("/", middleware.isLoggedIn, middleware.checkReviewExistence, function (req, res) {
-  Campground.findOne({slug: req.params.slug}).populate("reviews").exec(function (err, campground) {
+  Campground.findOne({
+    slug: req.params.slug
+  }).populate("reviews").exec(function (err, campground) {
     if (err || !campground) {
       req.flash("error", err.message);
       return res.redirect("back");
@@ -89,7 +95,9 @@ router.put("/:review_id", middleware.checkReviewOwnership, function (req, res) {
       req.flash("error", err.message);
       return res.redirect("back");
     }
-    Campground.findOne({slug: req.params.slug}).populate("reviews").exec(function (err, campground) {
+    Campground.findOne({
+      slug: req.params.slug
+    }).populate("reviews").exec(function (err, campground) {
       if (err || !campground) {
         req.flash("error", err.message);
         return res.redirect("back");
@@ -109,7 +117,15 @@ router.delete("/:review_id", middleware.checkReviewOwnership, function (req, res
       req.flash("error", err.message);
       return res.redirect("back");
     }
-    Campground.findOneAndUpdate({slug: req.params.slug}, {$pull: {reviews: req.params.review_id}}, {new:true}).populate("reviews").exec(function (err, campground) {
+    Campground.findOneAndUpdate({
+      slug: req.params.slug
+    }, {
+      $pull: {
+        reviews: req.params.review_id
+      }
+    }, {
+      new: true
+    }).populate("reviews").exec(function (err, campground) {
       if (err || !campground) {
         req.flash("error", err.message);
         return res.redirect("back");

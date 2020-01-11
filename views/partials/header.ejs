@@ -54,6 +54,7 @@
                         <a class="dropdown-item btn btn-custom btn-no-border"
                             href="/notifications/<%=notification.id%>"><em><%=notification.username%></em> created a new
                             campground.</a>
+                            <p class="float-right"><small><%=notification.createdAt().toDateString()%></small></p>
                         <% }); %>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View past

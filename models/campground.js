@@ -1,5 +1,4 @@
 var mongoose = require("mongoose"),
-    Comment = require("./comment"),
     Notification = require("./notification"),
     cloudinary = require("cloudinary").v2,
     Review = require("./review");
@@ -25,12 +24,6 @@ var campgroundSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    comments: [ //an array of comment ids
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Comment" //name of our model
-        }
-    ],
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

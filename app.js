@@ -14,7 +14,6 @@ var express = require("express"),
 
 // Require routes
 var campgroundRoutes = require("./routes/campgrounds"),
-    commentRoutes = require("./routes/comments"),
     reviewRoutes = require("./routes/reviews"),
     indexRoutes = require("./routes/index"); // auth routes
 
@@ -74,7 +73,6 @@ app.use(methodOverride("_method"));
 // seedDB(); //seed the db
 
 app.use("/", indexRoutes);
-app.use("/campgrounds/:slug/comments", commentRoutes);
 app.use("/campgrounds/:slug/reviews", reviewRoutes);
 app.use("/campgrounds", campgroundRoutes);
 

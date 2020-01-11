@@ -1,5 +1,4 @@
 var Campground = require("../models/campground");
-var Comment = require("../models/comment");
 var Review = require("../models/review");
 var middlewareObj = {};
 
@@ -15,31 +14,6 @@ middlewareObj.checkCampgroundOwnership = function (req, res, next) {
                 // console.log(foundCampground.author.id); // this is object (mongoose object)
                 // console.log(req.user._id); // this is String,so we can't use === but .equals
                 if (foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) {
-                    next();
-                } else {
-                    req.flash("error", "You don't have permission!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-                    res.redirect("back");
-                }
-            }
-        });
-    } else {
-        req.flash("error", "You need to be logged in!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-        res.redirect("back")
-    }
-};
-
-middlewareObj.checkCommentOwnership = function (req, res, next) {
-    // is user logged in?
-    if (req.isAuthenticated()) {
-        Comment.findById(req.params.comment_id, function (err, foundComment) {
-            if (err || !foundComment) {
-                req.flash("error", "Comment not found!");
-                res.redirect("back");
-            } else {
-                // does user own campground?
-                // console.log(foundComment.author.id); // this is object (mongoose object)
-                // console.log(req.user._id); // this is String,so we can't use === but .equals
-                if (foundComment.author.id.equals(req.user._id) || req.user.isAdmin) {
                     next();
                 } else {
                     req.flash("error", "You don't have permission!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});

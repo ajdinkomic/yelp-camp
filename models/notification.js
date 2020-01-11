@@ -4,9 +4,11 @@ var notificationSchema = new mongoose.Schema({
   username: String,
   campgroundSlug: String,
   isRead: {
-    type: Boolean, 
+    type: Boolean,
     default: false
   }
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model("Notification", notificationSchema)

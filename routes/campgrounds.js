@@ -1,10 +1,8 @@
 var express = require("express"),
     router = express.Router(),
     Campground = require("../models/campground"),
-    Comment = require("../models/comment"),
     User = require("../models/user"),
     Notification = require("../models/notification"),
-    Review = require("../models/review"),
     multer = require("multer"),
     cloudinary = require("cloudinary").v2,
     middleware = require("../middleware"); // if we require folder it requires automatically file named index.js 
@@ -161,7 +159,7 @@ router.get("/:slug", function (req, res) {
     //find campground with provided slug
     Campground.findOne({
         slug: req.params.slug
-    }).populate("comments").populate({
+    }).populate({
         path: "reviews",
         options: {
             sort: {

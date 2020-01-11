@@ -217,7 +217,7 @@ small, small:focus{
 }
 
 .all-campgrounds-container .card {
-  height: 600px;
+  height: 700px;
 }
 
 .all-campgrounds-container .card-img-top {
@@ -226,6 +226,15 @@ small, small:focus{
 
 .all-campgrounds-container .list-group-item {
   padding: 1rem 0;
+}
+
+.all-campgrounds-container .list-group-item i{
+  color:#4eb980;
+}
+
+.all-campgrounds-container .list-group-item a{
+  color:#646464;
+  font-weight: 400;
 }
 
 /*=======================================
