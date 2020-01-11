@@ -19,6 +19,8 @@ After registration, users can post new campgrounds, leave reviews on other users
 - Password reset
 - Email sending using Nodemailer
 - Add, delete, edit campgrounds
+- Pagination
+- Flash messages
 - Campground search
 - Image upload using Multer and Cloudinary
 - Campground slugs
@@ -30,6 +32,8 @@ After registration, users can post new campgrounds, leave reviews on other users
 - ~~Campground reviews~~
 - ~~In app notifications~~
 - Image gallery
-- Messages
+- In app messages
 - AJAX features
 - Favorite Campgrounds
+- Automatic image optimization with Cloudinary
+- Thumbnails (for index page) and full images (for show campground page)
