@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
-<header id="header" class="mt-5">
-    <div class="container-fluid">
+<header id="header" class="pt-5">
+    <div class="container-fluid py-5">
         <div class="row m-0 justify-content-center align-items-center">
             <div class="col-md-12 text-center">
                 <h1>Welcome to YelpCamp!</h1>
@@ -21,7 +21,7 @@
     </div>
 </header>
 
-<section class="index-campgrounds">
+<section id="index-campgrounds">
     <div class="container mt-5 all-campgrounds-container">
         <div class="row">
             <% if(campgrounds.length < 1) { %> <div class="col-md-12 text-center">
@@ -29,7 +29,7 @@
                         </div>
                         <% } else { %>
                         <% campgrounds.forEach(function(campground){ %>
-                        <div class="col-md-6 mb-4">
+                        <div class="col-lg-6 mb-4">
                             <div class="card">
                                 <a href="/campgrounds/<%= campground.slug %>"><img src="<%= campground.image %>"
                                         class="card-img-top" alt="<%=campground.name%> image."></a>
@@ -72,7 +72,7 @@
             </div>
             </section>
 
-            <div class="container mb-4">
+            <div class="container mb-5 mt-4">
                 <nav aria-label="Page navigation">
                     <% if (pages && pages > 0) { %>
                     <ul class="pagination justify-content-center">

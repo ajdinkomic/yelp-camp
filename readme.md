@@ -19,6 +19,7 @@ After registration, users can post new campgrounds, leave reviews on other users
 - Password reset
 - Email sending using Nodemailer
 - Add, delete, edit campgrounds
+- Google maps - Geocoding
 - Pagination
 - Flash messages
 - Campground search

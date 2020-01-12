@@ -4,6 +4,7 @@ var express = require("express"),
     User = require("../models/user"),
     Campground = require("../models/campground"),
     Notification = require("../models/notification"),
+    Review = require("../models/review"),
     async = require("async"),
         nodemailer = require("nodemailer"),
         crypto = require("crypto"),
@@ -27,11 +28,17 @@ router.get("/register", function (req, res) {
 
 //handle sign up logic
 router.post("/register", function (req, res) {
+    let profilePhoto = null;
+    if (req.body.profilePhoto) {
+        profilePhoto = req.body.profilePhoto;
+    } else {
+        profilePhoto = "https://images.unsplash.com/photo-1455763916899-e8b50eca9967?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+    }
     var newUser = new User({
         username: req.body.username,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        profilePhoto: req.body.profilePhoto,
+        profilePhoto: profilePhoto,
         email: req.body.email,
         facebook: req.body.facebook,
         youtube: req.body.youtube,
@@ -85,17 +92,14 @@ router.get("/users/:username", async function (req, res) {
     try {
         let user = await User.findOne({
             username: req.params.username
-        }).populate("followers").exec();
-        Campground.find().where("author.id").equals(user._id).exec(function (err, campgrounds) {
-            if (err) {
-                req.flash("error", "Campgrounds not found!");
-                return res.redirect("/campgrounds");
-            }
-            res.render("users/show", {
-                user,
-                campgrounds
-            });
         });
+        let campgrounds = await Campground.find({"author.id" : user._id});
+        let reviews = await Review.find({"author.id" : user._id});
+        res.render("users/show", {
+            user,
+            campgrounds,
+            reviews
+        })
     } catch (err) {
         req.flash("error", err.message);
         res.redirect("back");
@@ -130,8 +134,15 @@ router.get("/notifications", middleware.isLoggedIn, async function (req, res) {
             }
         }).exec();
         let allNotifications = user.notifications;
+        let allUnreadNotifications = [];
+        allNotifications.forEach(function (notification) {
+            if (!notification.isRead) {
+                allUnreadNotifications.push(notification);
+            }
+        })
         res.render("notifications/index", {
-            notifications: allNotifications
+            notifications: allNotifications,
+            unreadNotifications: allUnreadNotifications
         });
     } catch (err) {
         req.flash("error", err.message);

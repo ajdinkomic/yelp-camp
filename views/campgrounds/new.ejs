@@ -1,42 +1,44 @@
 <% include ../partials/header %>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12 text-center mt-5">
-            <h1>Create New Campground</h1>
-        </div>
-        <div class="col-md-6 offset-md-3 mt-4">
-            <form action="/campgrounds" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Yosemite" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input class="form-control" type="text" name="location" id="location"
-                        placeholder="Yosemite National Park, CA" required>
-                </div>
-                <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="number" class="form-control" placeholder="9.99" name="price" id="price" min="0" step="0.01"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="file" name="image" id="image" accept="image/*" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-control" placeholder="California’s Sierra Nevada mountains."
-                        name="description" id="description" required>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-custom btn-lg btn-greenish-full btn-block">Submit</button>
-                </div>
-            </form>
-                    <div class="text-center">
-                        <a href="/campgrounds">All Campgrounds</a>
+<section id="new-campground-section">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1>Create New Campground</h1>
+            </div>
+            <div class="col-lg-6 offset-lg-3 mt-4">
+                <form action="/campgrounds" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Yosemite" name="name" required>
                     </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input class="form-control" type="text" name="location" id="location"
+                            placeholder="Yosemite National Park, CA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" class="form-control" placeholder="9.99" name="price" id="price" min="0"
+                            step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" name="image" id="image" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" placeholder="California’s Sierra Nevada mountains."
+                            name="description" id="description" required>
+                    </div>
+                    <div class="form-group mt-5">
+                        <button class="btn btn-custom btn-greenish-full btn-block">Submit</button>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <a href="/campgrounds">All Campgrounds</a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<% include ../partials/footer %>
+</section>
+<% include ../partials/footer-scripts-only %>

@@ -127,7 +127,7 @@ router.delete("/:review_id", middleware.checkReviewOwnership, function (req, res
       new: true
     }).populate("reviews").exec(function (err, campground) {
       if (err || !campground) {
-        req.flash("error", err.message);
+        req.flash("error", "Campground not found!");
         return res.redirect("back");
       }
       campground.rating = calculateAvg(campground.reviews);

@@ -10,7 +10,10 @@ var mongoose = require("mongoose"),
         password: String,
         firstName: String,
         lastName: String,
-        profilePhoto: String,
+        profilePhoto: {
+            type: String,
+            default: "https://images.unsplash.com/photo-1572288623190-5bb8b0d81aa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+        },
         email: {
             type: String,
             unique: true,
@@ -38,6 +41,8 @@ var mongoose = require("mongoose"),
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }]
+    }, {
+        timestamps: true
     });
 
 UserSchema.plugin(pasportLocalMongoose);

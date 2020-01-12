@@ -95,22 +95,25 @@ router.get("/", function (req, res) {
 });
 
 // CREATE - add new campground to DB
-router.post("/", middleware.isLoggedIn, upload.single("image"), function (req, res) {
-    cloudinary.uploader.upload(req.file.path, function (err, result) {
-        // get data from form and add to campgrounds array
-        var name = req.body.name;
-        var image = result.secure_url;
-        var imageId = result.public_id;
-        var desc = req.body.description;
-        var price = req.body.price;
-        var author = {
-            id: req.user._id,
-            username: req.user.username
-        }
-        geocoder.geocode(req.body.location, async function (err, data) {
-            if (err || !data.length) {
-                req.flash("error", "Invalid address");
-                return res.redirect("back");
+router.post("/", middleware.isLoggedIn, upload.single("image"), async function (req, res) {
+
+    try {
+        let data = await geocoder.geocode(req.body.location);
+        if (!data || data.length === 0) {
+            throw new Error("Invalid address!");
+        } else {
+
+            let result = await cloudinary.uploader.upload(req.file.path);
+
+            // get data from form and add to campgrounds array
+            var name = req.body.name;
+            var image = result.secure_url;
+            var imageId = result.public_id;
+            var desc = req.body.description;
+            var price = req.body.price;
+            var author = {
+                id: req.user._id,
+                username: req.user.username
             }
             var lat = data[0].latitude;
             var lng = data[0].longitude;
@@ -126,26 +129,27 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function (req, r
                 lat: lat,
                 lng: lng
             };
-            // Create a new campground and save to DB
-            try {
-                let campground = await Campground.create(newCampground);
-                let user = await User.findById(req.user._id).populate("followers").exec();
-                let newNotification = {
-                    username: req.user.username,
-                    campgroundSlug: campground.slug
-                }
-                for (const follower of user.followers) {
-                    let notification = await Notification.create(newNotification);
-                    follower.notifications.push(notification);
-                    follower.save();
-                }
-                res.redirect("/campgrounds");
-            } catch (err) {
-                req.flash("error", err.message);
-                return res.redirect('back');
+
+            let campground = await Campground.create(newCampground);
+            let user = await User.findById(req.user._id).populate("followers").exec();
+            let newNotification = {
+                username: req.user.username,
+                campgroundSlug: campground.slug
             }
-        });
-    });
+            for (const follower of user.followers) {
+                let notification = await Notification.create(newNotification);
+                follower.notifications.push(notification);
+                follower.save();
+            }
+            req.flash("success", "Thank you for submitting your campground!");
+            res.redirect(`/campgrounds/${campground.slug}`);
+
+        }
+
+    } catch (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+    }
 });
 
 // NEW - show form to create new campground
@@ -221,8 +225,8 @@ router.put("/:slug", middleware.checkCampgroundOwnership, upload.single("image")
                     campground.lng = data[0].longitude;
                     campground.location = data[0].formattedAddress;
                 } catch (err) {
-                    req.flash("error", err.message);
-                    return res.redirect('back');
+                    req.flash("error", "Invalid address");
+                    return res.redirect("back");
                 }
             }
             campground.name = req.body.campground.name;

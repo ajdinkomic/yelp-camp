@@ -46,7 +46,7 @@ app.use(async function (req, res, next) {
                     "_id": -1
                 }
             }).exec();
-            res.locals.notifications = user.notifications;
+            res.locals.unreadNotifications = user.notifications;
         } catch (err) {
             console.log(err.message);
         }

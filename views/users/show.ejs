@@ -1,55 +1,152 @@
 <% include ../partials/header %>
-<div class="container offset-from-top">
-    <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
-            <img src="<%=user.profilePhoto%>" alt="<%= user.username %> profile photo."
-                style="width: 300px; height: 300px; border-radius: 100%;">
-            <h2><%=user.firstName + " " + user.lastName%></h2>
-            <ul class="user-links p-0">
-                <% if(user.facebook !== "") { %>
-                <a href="<%= user.facebook %>" target="_blank" rel="noopener noreferrer"><i
-                        class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
+<section id="user-profile-section">
+    <div class="container py-4 bg-white">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center">
+
+                <img src="<%=user.profilePhoto%>" alt="<%= user.username %> profile photo."
+                    style="width: 150px; height: 150px; border-radius: 100%;">
+
+                <h3 class="mt-2"><%=user.firstName + " " + user.lastName%></h3>
+
+                <ul class="user-links p-0">
+                    <% if(user.facebook !== "") { %>
+                    <a href="<%= user.facebook %>" class="mx-1" target="_blank"><i class="fab fa-2x fa-facebook-square"
+                            aria-hidden="true"></i></a>
+                    <% } %>
+                    <% if(user.youtube !== "") { %>
+                    <a href="<%= user.youtube %>" class="mx-1" target="_blank"><i class="fab fa-2x fa-youtube-square"
+                            aria-hidden="true"></i></a>
+                    <% } %>
+                    <% if(user.twitter !== "") { %>
+                    <a href="<%= user.twitter %>" class="mx-1" target="_blank"><i class="fab fa-2x fa-twitter-square"
+                            aria-hidden="true"></i></a>
+                    <% } %>
+                    <% if(user.linkedIn !== "") { %>
+                    <a href="<%= user.linkedIn %>" class="mx-1" target="_blank"><i class="fab fa-2x fa-linkedin"
+                            aria-hidden="true"></i></a>
+                    <% } %>
+                </ul>
+
+                <p>Campgrounds: <%= campgrounds.length %></p>
+                <p>Reviews: <%= reviews.length %></p>
+
+                <% if(user.shareEmail) { %>
+                <p class="mt-2"><em><small><%= user.email %></small></em></p>
                 <% } %>
-                <% if(user.youtube !== "") { %>
-                <a href="<%= user.youtube %>" target="_blank" rel="noopener noreferrer"><i
-                        class="fa fa-2x fa-youtube-play" aria-hidden="true"></i></a>
+
+                <% if(currentUser && (currentUser.username !== user.username)) { %>
+                <a href="/follow/<%= user.username %>" class="btn btn-custom btn-greenish-full mt-3">Follow
+                    <%= user.username %>
+                </a>
                 <% } %>
-                <% if(user.twitter !== "") { %>
-                <a href="<%= user.twitter %>" target="_blank" rel="noopener noreferrer"><i
-                        class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
-                <% } %>
-                <% if(user.linkedIn !== "") { %>
-                <a href="<%= user.linkedIn %>" target="_blank" rel="noopener noreferrer"><i
-                        class="fa fa-2x fa-linkedin-square" aria-hidden="true"></i></a>
-                <% } %>
-            </ul>
-            <!-- <% if(user.shareEmail) { %>
-                    <h3><%= user.email %></h3>
-                    <% } %> -->
-            <% if(currentUser && currentUser !== user) { %><a href="/follow/<%= user.id %>"><button class="btn btn-primary">Follow <%= user.username %></button></a><% } %>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <h2><%= user.firstName %>'s Campgrounds</h2>
-            <div class="row">
-                <% campgrounds.forEach(function(campground){ %>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img src="<%= campground.image %>" class="card-img-top" alt="<%=campground.name%> image.">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= campground.name %></h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
-                            <!-- campground.id instead of campground._id is getter method and it returns id as a string and it is good for using string inside of string but we may use both-->
-                            <a href="/campgrounds/<%= campground.id %>" class="btn btn-primary card-text">More info</a>
+            </div>
+            <div class="col-md-8 border-left mt-3 mt-md-0 text-center">
+                <h4><%= user.firstName %>'s Campgrounds</h4>
+                <div id="user-carousel">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-interval="false">
+                                <div class="card mx-auto my-2">
+                                    <a href="/campgrounds/<%= campgrounds[0].slug %>"><img
+                                            src="<%= campgrounds[0].image %>" class="card-img-top"
+                                            alt="<%=campgrounds[0].name%> image."></a>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= campgrounds[0].name.substring(0,40) %></h5>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item border-top-0">
+                                                <p class="card-text"><i
+                                                        class="fas fa-info-circle mr-1"></i><%= campgrounds[0].description.substring(0,40)+"..." %>
+                                                </p>
+                                            </li>
+                                            <li class="list-group-item"><i
+                                                    class="far fa-calendar mr-1"></i><%= campgrounds[0].createdAt.toDateString() %>
+                                            </li>
+                                        </ul>
+
+                                        <% if (campgrounds[0].rating === 0) { %>
+                                        <div class="card-text text-center pt-4 mb-1"><em>No reviews yet</em></div>
+                                        <% } else { %>
+                                        <p class="card-text text-center pt-4 mb-1">
+                                            <span class="fas fa-star checked-star"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[0].rating >= 1.5) { %> checked-star <% } %>"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[0].rating >= 2.5) { %> checked-star <% } %>"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[0].rating >= 3.5) { %> checked-star <% } %>"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[0].rating >= 4.5) { %> checked-star <% } %>"></span>
+                                            <em>(<%= campgrounds[0].reviews.length %>)</em>
+                                        </p>
+                                        <% } %>
+                                        <div class="text-center">
+                                            <a href="/campgrounds/<%= campgrounds[0].slug %>"
+                                                class="btn btn-custom btn-greenish-full mt-1">More
+                                                info</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% for(var i = 1; i < campgrounds.length; i++){ %>
+                            <div class="carousel-item" data-interval="false">
+                                <div class="card mx-auto my-2">
+                                    <a href="/campgrounds/<%= campgrounds[i].slug %>"><img
+                                            src="<%= campgrounds[i].image %>" class="card-img-top"
+                                            alt="<%=campgrounds[i].name%> image."></a>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= campgrounds[i].name.substring(0,40) %></h5>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item border-top-0">
+                                                <p class="card-text"><i
+                                                        class="fas fa-info-circle mr-1"></i><%= campgrounds[i].description.substring(0,40)+"..." %>
+                                                </p>
+                                            </li>
+                                            <li class="list-group-item"><i
+                                                    class="far fa-calendar mr-1"></i><%= campgrounds[i].createdAt.toDateString() %>
+                                            </li>
+                                        </ul>
+
+                                        <% if (campgrounds[i].rating === 0) { %>
+                                        <div class="card-text text-center pt-4 mb-1"><em>No reviews yet</em></div>
+                                        <% } else { %>
+                                        <p class="card-text text-center pt-4 mb-1">
+                                            <span class="fas fa-star checked-star"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[i].rating >= 1.5) { %> checked-star <% } %>"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[i].rating >= 2.5) { %> checked-star <% } %>"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[i].rating >= 3.5) { %> checked-star <% } %>"></span>
+                                            <span
+                                                class="fas fa-star <% if (campgrounds[i].rating >= 4.5) { %> checked-star <% } %>"></span>
+                                            <em>(<%= campgrounds[i].reviews.length %>)</em>
+                                        </p>
+                                        <% } %>
+                                        <div class="text-center">
+                                            <a href="/campgrounds/<%= campgrounds[i].slug %>"
+                                                class="btn btn-custom btn-greenish-full mt-1">More
+                                                info</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
                         </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
                 </div>
-                <% }); %>
             </div>
         </div>
     </div>
-</div>
-<% include ../partials/footer %>
+</section>
+<% include ../partials/footer-scripts-only %>

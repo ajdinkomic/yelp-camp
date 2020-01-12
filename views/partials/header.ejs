@@ -47,14 +47,14 @@
                         id="navbarDropdownNotification" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="fas fa-bell"></i> <sup><span
-                                class="badge <%if (notifications.length >0) { %>badge-danger<% } %> rounded-circle"><%= notifications.length %></span></sup>
+                                class="badge <%if (unreadNotifications.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadNotifications.length %></span></sup>
                     </a>
                     <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownNotification">
-                        <% notifications.forEach(function(notification){ %>
+                        <% unreadNotifications.forEach(function(notification){ %>
                         <a class="dropdown-item btn btn-custom btn-no-border"
                             href="/notifications/<%=notification.id%>"><em><%=notification.username%></em> created a new
                             campground.</a>
-                            <p class="float-right"><small><%=notification.createdAt().toDateString()%></small></p>
+                            <p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
                         <% }); %>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View past
@@ -73,12 +73,12 @@
                         <%= currentUser.username %>
                     </a>
                     <div class="dropdown-menu user-dropdown bg-dark px-2" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/users/<%=currentUser.id%>">Go to
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/users/<%=currentUser.username%>"><i class="fas fa-id-card mr-1"></i> Go to
                             profile</a>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="#">Edit profile information</a>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/logout">Logout</a>
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="#"><i class="fas fa-user-edit mr-1"></i> Edit profile information</a>
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/logout"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/campgrounds/new">Add new
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/campgrounds/new"><i class="fas fa-plus mr-1"></i> Add new
                             campground</a>
                     </div>
                 </li>
@@ -87,7 +87,7 @@
         </div>
     </nav>
 
-    <div class="container-fluid flashalert mt-1 text-center p-0">
+    <div class="container-fluid flashalert text-center">
         <div class="row justify-content-center">
             <div class="col-12">
                 <% if(errorMessage && errorMessage.length > 0){ %>

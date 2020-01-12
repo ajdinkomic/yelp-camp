@@ -1,13 +1,14 @@
 <% include ../partials/header %>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card mt-5 show-campground-card">
-                <img src="<%= campground.image %>" class="card-img-top" alt="<%=campground.name%> image.">
-                <div class="card-body">
-                    <h5 class="card-text float-right">$<%= campground.price %>/night</h5>
-                    <h5 class="card-title"><%= campground.name %></h5>
-                    <% if (campground.rating === 0) { %>
+<section id="show-campground-info-section">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mt-5 show-campground-card">
+                    <img src="<%= campground.image %>" class="card-img-top" alt="<%=campground.name%> image.">
+                    <div class="card-body">
+                        <h5 class="card-text float-right">$<%= campground.price %>/night</h5>
+                        <h5 class="card-title"><%= campground.name %></h5>
+                        <% if (campground.rating === 0) { %>
                         <p class="card-text">
                             <em>No reviews yet.</em>
                         </p>
@@ -28,81 +29,84 @@
 
                         <p class="card-text"><em>Description:</em></p>
                         <p class="card-text mb-5"><%= campground.description %></p>
-                    <p class="card-text float-right">
-                        <small><em>Submitted by <a
-                                href="/users/<%=campground.author.username%>"><%= campground.author.username %></a>,
-                            <%= moment(campground.createdAt).fromNow() %></em></small>
+                        <p class="card-text float-right">
+                            <small><em>Submitted by <a
+                                        href="/users/<%=campground.author.username%>"><%= campground.author.username %></a>,
+                                    <%= moment(campground.createdAt).fromNow() %></em></small>
                         </p>
-                    
-                    <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
-                    <a href="/campgrounds/<%=campground.slug%>/edit" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="/campgrounds/<%=campground.slug%>?_method=DELETE" method="POST" class="d-inline">
-                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
-                    </form>
-                    <% } %>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Google maps -->
-    <div class="row">
-        <div class="col-md-12 my-3">
-            <div id="map"></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 mb-5">
-            <div class="card">
-                <div class="card-body">
-                    
-                    <h4 class="card-text">
-                        Latest reviews:
-                    </h4>
-                    <hr style="margin-top: 0;">
-
-                    <% campground.reviews.slice(0,5).forEach(function(review){ %>
-                    <div class="row">
-                        <div class="col-md-3"><small><%- '<span class="fas fa-star checked-star"></span>'.repeat(review.rating)%><%- '<span class="fas fa-star"></span>'.repeat(5 - review.rating) %></small>
-                        <div class="card-text">
-                                <strong><%= review.author.username %></strong>
-                            </div>
-                            <div class="card-text">
-                                <small><em><%= review.updatedAt.toDateString() %></em></small>
-                            </div>
-                            <% if((currentUser && review.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
-                            <a class="btn btn-sm btn-warning mt-2"
-                                href="/campgrounds/<%=campground.slug %>/reviews/<%=review.id %>/edit">Edit</a>
-                            <form id="delete-form"
-                                action="/campgrounds/<%=campground.slug %>/reviews/<%=review.id %>?_method=DELETE"
-                                method="POST" class="d-inline">
-                                <input type="submit" class="btn btn-sm btn-danger mt-2" value="Delete">
-                            </form>
-                            <% } %>
-                        </div>
-                        <div class="col-md-9">
-                            <p class="card-text mt-3" style="word-wrap: break-word;">
-                             <%= review.text %>
-                            </p>
-                        </div>
+                        <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+                        <a href="/campgrounds/<%=campground.slug%>/edit" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="/campgrounds/<%=campground.slug%>?_method=DELETE" method="POST" class="d-inline">
+                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                        </form>
+                        <% } %>
                     </div>
-                    <hr>
-                    <% }); %>
                 </div>
             </div>
-            <div class="mt-3">
-                <a href="/campgrounds/<%= campground.slug %>/reviews"><i class="fas fa-search mx-1"></i> See all
-                    reviews</a>
+        </div>
+
+        <!-- Google maps -->
+        <div class="row">
+            <div class="col-md-12 my-3">
+                <div id="map"></div>
             </div>
-            <div class="text-center mt-5">
-                <a href="/campgrounds/<%=campground.slug%>/reviews/new"
-                    class="btn btn-custom btn-greenish-full d-block <% if(currentUser && campground.reviews.some(function(review){ return review.author.id.equals(currentUser.id) })) { %>disabled<% } %>">Write
-                    a New Review</a>
+        </div>
+
+        <!-- Reviews-->
+        <div class="row">
+            <div class="col-md-12 mb-5">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-text">
+                            Latest reviews:
+                        </h4>
+                        <hr style="margin-top: 0;">
+
+                        <% campground.reviews.slice(0,5).forEach(function(review){ %>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <small><%- '<span class="fas fa-star checked-star"></span>'.repeat(review.rating)%><%- '<span class="fas fa-star"></span>'.repeat(5 - review.rating) %></small>
+                                <div class="card-text">
+                                    <strong><%= review.author.username %></strong>
+                                </div>
+                                <div class="card-text">
+                                    <small><em><%= review.updatedAt.toDateString() %></em></small>
+                                </div>
+                                <% if((currentUser && review.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)){ %>
+                                <a class="btn btn-sm btn-warning mt-2"
+                                    href="/campgrounds/<%=campground.slug %>/reviews/<%=review.id %>/edit">Edit</a>
+                                <form id="delete-form"
+                                    action="/campgrounds/<%=campground.slug %>/reviews/<%=review.id %>?_method=DELETE"
+                                    method="POST" class="d-inline">
+                                    <input type="submit" class="btn btn-sm btn-danger mt-2" value="Delete">
+                                </form>
+                                <% } %>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="card-text mt-3" style="word-wrap: break-word;">
+                                    <%= review.text %>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <% }); %>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <a href="/campgrounds/<%= campground.slug %>/reviews"><i class="fas fa-search mx-1"></i> See all
+                        reviews</a>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="/campgrounds/<%=campground.slug%>/reviews/new"
+                        class="btn btn-custom btn-greenish-full d-block <% if((currentUser && campground.reviews.some(function(review){ return review.author.id.equals(currentUser.id) })) || (currentUser.username === campground.author.username)) { %>disabled<% } %>">Write
+                        a New Review</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script>
     function initMap() {
