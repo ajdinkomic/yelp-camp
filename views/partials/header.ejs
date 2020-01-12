@@ -50,6 +50,9 @@
                                 class="badge <%if (unreadNotifications.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadNotifications.length %></span></sup>
                     </a>
                     <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownNotification">
+                        <% if(unreadNotifications.length === 0){ %>
+                            <p class="text-white text-center"><em>No New Notifications</em></p>
+                        <% } %>
                         <% unreadNotifications.forEach(function(notification){ %>
                         <a class="dropdown-item btn btn-custom btn-no-border"
                             href="/notifications/<%=notification.id%>"><em><%=notification.username%></em> created a new

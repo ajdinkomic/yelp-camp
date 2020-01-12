@@ -35,7 +35,17 @@
                 <p class="mt-2"><em><small><%= user.email %></small></em></p>
                 <% } %>
 
-                <% if(currentUser && (currentUser.username !== user.username)) { %>
+                <% 
+                if(currentUser){
+                    var isFollower = false;
+                    user.followers.forEach(function(follower) { 
+                        if(follower.equals(currentUser._id)){
+                            isFollower = true;
+                        }     
+                    });
+                }     
+                %>
+                <% if(currentUser && (currentUser.username !== user.username) && !isFollower) { %>
                 <a href="/follow/<%= user.username %>" class="btn btn-custom btn-greenish-full mt-3">Follow
                     <%= user.username %>
                 </a>

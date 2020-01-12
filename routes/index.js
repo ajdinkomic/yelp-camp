@@ -92,7 +92,7 @@ router.get("/users/:username", async function (req, res) {
     try {
         let user = await User.findOne({
             username: req.params.username
-        });
+        }).populate("followers").exec();
         let campgrounds = await Campground.find({
             "author.id": user._id
         });

@@ -69,6 +69,54 @@ small:focus {
   padding: 0.45rem;
 }
 
+.btn-custom {
+  background-color: transparent;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.btn-greenish {
+  color: #4eb980 !important;
+}
+
+.btn-greenish-full {
+  color: #fff !important;
+  background: #4eb980 !important;
+}
+
+.btn-custom:hover {
+  background-color: #4eb980;
+  color: #fff !important;
+}
+
+.btn.btn-fill,
+.btn.btn-fill:hover {
+  box-shadow: none;
+  background-color: #fff;
+  color: #646464 !important;
+}
+
+.card,
+#map {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border: 0;
+}
+
+.card-img-top {
+  border: 0;
+  object-fit: cover;
+}
+
+.checked-star {
+  color: orange;
+}
+
+/*************************************************
+              NAVIGATION
+*************************************************/
+
 .navbar {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
@@ -112,48 +160,8 @@ small:focus {
   display: none;
 }
 
-.btn-custom {
-  background-color: transparent;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-.btn-greenish {
-  color: #4eb980 !important;
-}
-
-.btn-greenish-full {
-  color: #fff !important;
-  background: #4eb980 !important;
-}
-
-.btn-custom:hover {
-  background-color: #4eb980;
-  color: #fff !important;
-}
-
-.btn.btn-fill,
-.btn.btn-fill:hover {
-  box-shadow: none;
-  background-color: #fff;
-  color: #646464 !important;
-}
-
 .navbar .btn-no-border {
   box-shadow: none;
-}
-
-.card,
-#map {
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  border: 0;
-}
-
-.card-img-top {
-  border: 0;
-  object-fit: cover;
 }
 
 .user-profile-photo-nav {
@@ -163,15 +171,6 @@ small:focus {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   object-fit: cover;
 }
-
-.checked-star {
-  color: orange;
-}
-
-/*************************************************
-              NAVIGATION
-*************************************************/
-
 
 /*************************************************
               LANDING
@@ -375,7 +374,7 @@ small:focus {
               USERS/SHOW
 ========================================*/
 
-#user-profile-section .container{
+#user-profile-section .container {
   padding-top: 7rem;
 }
 
@@ -402,7 +401,8 @@ small:focus {
   font-weight: 400;
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon{
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
   background-color: #4eb980;
 }
 
@@ -431,7 +431,7 @@ small:focus {
 /*=======================================
           NOTIFICATIONS/INDEX
 ========================================*/
-#notifications-index-section .list-group .list-group-item{
+#notifications-index-section .list-group .list-group-item {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -440,7 +440,7 @@ small:focus {
 ========================================*/
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-nav .dropdown-menu {
-    margin-left: -5.5rem;
+    margin-left: -7.5rem;
   }
 }
 
