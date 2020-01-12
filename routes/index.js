@@ -93,8 +93,12 @@ router.get("/users/:username", async function (req, res) {
         let user = await User.findOne({
             username: req.params.username
         });
-        let campgrounds = await Campground.find({"author.id" : user._id});
-        let reviews = await Review.find({"author.id" : user._id});
+        let campgrounds = await Campground.find({
+            "author.id": user._id
+        });
+        let reviews = await Review.find({
+            "author.id": user._id
+        });
         res.render("users/show", {
             user,
             campgrounds,
@@ -134,14 +138,17 @@ router.get("/notifications", middleware.isLoggedIn, async function (req, res) {
             }
         }).exec();
         let allNotifications = user.notifications;
+        let notifications = [];
         let allUnreadNotifications = [];
         allNotifications.forEach(function (notification) {
             if (!notification.isRead) {
                 allUnreadNotifications.push(notification);
+            } else {
+                notifications.push(notification);
             }
         })
         res.render("notifications/index", {
-            notifications: allNotifications,
+            notifications: notifications,
             unreadNotifications: allUnreadNotifications
         });
     } catch (err) {
