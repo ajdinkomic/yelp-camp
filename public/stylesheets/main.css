@@ -454,7 +454,7 @@ small:focus {
   }
 
   #landing-header {
-    height: 100%;
+    height: 100vh;
   }
 
   #landing-header .btn {
@@ -505,7 +505,7 @@ small:focus {
   }
 
   #landing-header {
-    height: 100%;
+    height: 100vh;
   }
 
   #landing-content .row .col-md-8 {
@@ -550,7 +550,7 @@ small:focus {
   }
 
   #landing-header {
-    height: 100%;
+    height: 100vh;
   }
 
   #landing-content .row .col-md-8 {
