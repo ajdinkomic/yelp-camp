@@ -25,7 +25,18 @@
     <div class="container mt-5 all-campgrounds-container">
         <div class="row">
             <% if(campgrounds.length < 1) { %> <div class="col-md-12 text-center">
-                            <h1>No Campgrounds Found</h1>
+                            <h1 class="mt-3">No campgrounds match that query!</h1>
+                            <h3 class="mt-5">Please, try again:</h3>
+                            <div class="search my-5">
+                                    <form action="/campgrounds" method="GET" class="form-inline justify-content-center">
+                                        <!-- GET in this case when we submit instead of req.body information will be in req.query-->
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="search" name="search"
+                                                placeholder="Campground search..." <%if(search){%>value="<%=search%>" <%}%> />
+                                                <button type="submit" class="form-control form-inline my-1 m-sm-2 btn btn-custom btn-greenish-full"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                         <% } else { %>
                         <% campgrounds.forEach(function(campground){ %>
