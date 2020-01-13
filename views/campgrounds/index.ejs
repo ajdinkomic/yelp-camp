@@ -6,7 +6,7 @@
             <div class="col-md-12 text-center">
                 <h1>Welcome to YelpCamp!</h1>
                 <p>View our hand-picked campgrounds from all over the world</p>
-                <div class="search">
+                <div class="search" <% if(campgrounds.length < 1) { %> style="opacity:0;pointer-events:none;" <% } %> >
                     <form action="/campgrounds" method="GET" class="form-inline justify-content-center">
                         <!-- GET in this case when we submit instead of req.body information will be in req.query-->
                         <div class="form-group">
@@ -32,7 +32,7 @@
                                         <!-- GET in this case when we submit instead of req.body information will be in req.query-->
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="search" name="search"
-                                                placeholder="Campground search..." <%if(search){%>value="<%=search%>" <%}%> />
+                                                placeholder="Campground search..." <%if(search){%> value="<%=search%>" <%}%> />
                                                 <button type="submit" class="form-control form-inline my-1 m-sm-2 btn btn-custom btn-greenish-full"><i class="fas fa-search"></i></button>
                                     </div>
                                 </form>

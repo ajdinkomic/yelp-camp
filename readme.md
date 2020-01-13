@@ -1,5 +1,12 @@
 # YelpCamp
+
 ### Working App on: [yelp-camp-ajdin](http://yelp-camp-ajdin.herokuapp.com)
+For testing purposes use credentials:
+- username: **test**
+- password: **test**
+
+### Home page screenshot
+![Home page screenshot]("/img/screenshot.png")
 
 ### Description
 This is a web application for exploring campgrounds around the world, based on Colt Steele's [*The Web Developer Bootcamp*](https://www.udemy.com/course/the-web-developer-bootcamp/) course on Udemy.

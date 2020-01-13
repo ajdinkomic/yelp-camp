@@ -333,6 +333,7 @@ small:focus {
 #search {
   border-radius: 6px;
   width: 16rem;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 .all-campgrounds-container .card {
