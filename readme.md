@@ -6,7 +6,7 @@ For testing purposes use credentials:
 - password: **test**
 
 ### Home page screenshot
-![Home page screenshot]("/img/screenshot.png")
+![Home page screenshot](/public/img/screenshot.png)
 
 ### Description
 This is a web application for exploring campgrounds around the world, based on Colt Steele's [*The Web Developer Bootcamp*](https://www.udemy.com/course/the-web-developer-bootcamp/) course on Udemy.
