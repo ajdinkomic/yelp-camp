@@ -2,8 +2,8 @@
 
 ### Working App on: [yelp-camp-ajdin](https://yelp-camp-ajdin.herokuapp.com)
 For testing purposes use credentials:
-- username: **test**
-- password: **test**
+- username: **test**    or    username: **test2**
+- password: **test**          password: **test2**
 
 ### Home page screenshot
 ![Home page screenshot](/public/img/screenshot.png)
