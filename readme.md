@@ -1,6 +1,6 @@
 # YelpCamp
 
-### Working App on: [yelp-camp-ajdin](http://yelp-camp-ajdin.herokuapp.com)
+### Working App on: [yelp-camp-ajdin](https://yelp-camp-ajdin.herokuapp.com)
 For testing purposes use credentials:
 - username: **test**
 - password: **test**
