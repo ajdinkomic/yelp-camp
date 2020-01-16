@@ -38,11 +38,11 @@
                 <% 
                 if(currentUser){
                     var isFollower = false;
-                    user.followers.forEach(function(follower) { 
+                    for(const follower of user.followers){
                         if(follower.equals(currentUser._id)){
                             isFollower = true;
                         }     
-                    });
+                    }
                 }     
                 %>
                 <% if(currentUser && (currentUser.username !== user.username) && !isFollower) { %>
