@@ -231,7 +231,7 @@ router.post("/forgot", (req, res, next) => {
                 to: user.email,
                 from: "ajdin.komic12@gmail.com",
                 subject: "YelpCamp Password Reset Request",
-                text: `Dear ${user.firstName},\n\nYou are receiving this because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste this into your browser to complete the process:\n\nhttp://${req.headers.host}/reset/${token}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`
+                text: `Dear ${user.firstName},\n\nYou are receiving this because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste this into your browser to complete the process:\n\nhttps://${req.headers.host}/reset/${token}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`
             };
             smtpTransport.sendMail(mailOptions, err => {
                 req.flash("success", `An e-mail has been sent to ${user.email} with further instructions.`);
