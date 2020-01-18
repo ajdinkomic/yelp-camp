@@ -53,7 +53,7 @@
         </div>
         <div class="text-center mt-5">
             <a href="/campgrounds/<%=campground.slug%>/reviews/new"
-              class="btn btn-custom btn-greenish-full d-block <% if((currentUser && campground.reviews.some(function(review){ return review.author.id.equals(currentUser.id) })) || (currentUser.username === campground.author.username)) { %>disabled<% } %>">Write
+              class="btn btn-custom btn-greenish-full d-block <% if((currentUser && campground.reviews.some(function(review){ return review.author.id.equals(currentUser.id) })) || (currentUser && currentUser.username === campground.author.username)) { %>disabled<% } %>">Write
               a New Review</a>
         </div>
         <div class="text-center mt-3 mb-5">

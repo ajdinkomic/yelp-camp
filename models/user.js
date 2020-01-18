@@ -1,4 +1,4 @@
-var mongoose = require("mongoose"),
+const mongoose = require("mongoose"),
     pasportLocalMongoose = require("passport-local-mongoose"),
 
     UserSchema = new mongoose.Schema({

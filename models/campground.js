@@ -1,10 +1,10 @@
-var mongoose = require("mongoose"),
+const mongoose = require("mongoose"),
     Notification = require("./notification"),
     cloudinary = require("cloudinary").v2,
     Review = require("./review");
 
 //schema
-var campgroundSchema = new mongoose.Schema({
+const campgroundSchema = new mongoose.Schema({
     name: {
         type: String,
         required: "Campground name cannot be blank!"
@@ -76,17 +76,17 @@ campgroundSchema.pre("save", async function (next) {
 });
 
 // module.exports is very important!!!
-var Campground = mongoose.model("Campground", campgroundSchema);
+const Campground = mongoose.model("Campground", campgroundSchema);
 module.exports = Campground;
 
-async function generateUniqueSlug(id, campgroundName, slug) {
+let generateUniqueSlug = async (id, campgroundName, slug) => {
     try {
         // generate the initial slug (checks if it is not passed when calling a function in pre save hook)
         if (!slug) {
             slug = slugify(campgroundName);
         }
         // check if a campground with the slug already exists
-        var campground = await Campground.findOne({
+        const campground = await Campground.findOne({
             slug: slug
         });
         // check if a campground was found or if the found campground is the current campground (in case of updating a campground)
@@ -94,7 +94,7 @@ async function generateUniqueSlug(id, campgroundName, slug) {
             return slug;
         }
         // if not unique, generate a new slug
-        var newSlug = slugify(campgroundName);
+        const newSlug = slugify(campgroundName);
         // check again by calling the function recursively
         return await generateUniqueSlug(id, campgroundName, newSlug);
     } catch (err) {
@@ -103,8 +103,8 @@ async function generateUniqueSlug(id, campgroundName, slug) {
 }
 
 // method for making slug out of passed text(campground name)
-function slugify(text) {
-    var slug = text.toString().toLowerCase()
+let slugify = text => {
+    const slug = text.toString().toLowerCase()
         .replace(/\s+/g, '-') // replaces spaces with -
         .replace(/[^\w\-]+/g, '') // replace all non-word chars
         .replace(/\-\-+/g, '-') // replace multiple -- with single -

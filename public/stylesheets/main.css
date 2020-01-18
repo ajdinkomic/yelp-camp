@@ -183,7 +183,7 @@ small:focus {
 }
 
 #landing-header {
-  background-image: url("https://images.unsplash.com/photo-1496080174650-637e3f22fa03?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60");
+  background-image: url("../img/landing-header.jpg");
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -279,7 +279,7 @@ small:focus {
   margin-top: 1rem;
 }
 
-.scrolled {
+.toggledNav {
   background-color: #343a40 !important;
 }
 
@@ -294,7 +294,7 @@ small:focus {
 }
 
 #header {
-  background-image: url("https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60");
+  background-image: url("../img/index-header.jpg");
   background-position: 50% 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -563,6 +563,8 @@ small:focus {
 
   .all-campgrounds-container .card {
     height: 700px;
+    width: 80%;
+    margin: auto;
   }
 }
 

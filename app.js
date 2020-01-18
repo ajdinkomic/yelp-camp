@@ -1,7 +1,8 @@
-var dotenv = require("dotenv");
+// configure dotenv package
+const dotenv = require("dotenv");
 dotenv.config();
 
-var express = require("express"),
+const express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
@@ -10,10 +11,9 @@ var express = require("express"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
     User = require("./models/user");
-// var seedDB = require("./seeds");
 
 // Require routes
-var campgroundRoutes = require("./routes/campgrounds"),
+const campgroundRoutes = require("./routes/campgrounds"),
     reviewRoutes = require("./routes/reviews"),
     indexRoutes = require("./routes/index"); // auth routes
 
@@ -35,7 +35,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 // make our req.user or currentUser accessible on all routes and views
-app.use(async function (req, res, next) {
+app.use(async (req, res, next) => {
     res.locals.currentUser = req.user;
     if (req.user) {
         try {
@@ -61,7 +61,7 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 mongoose.set("useUnifiedTopology", true);
-var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v100";
+const url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v100";
 mongoose.connect(url);
 
 app.set("view engine", "ejs");
@@ -70,14 +70,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-// seedDB(); //seed the db
 
 app.use("/", indexRoutes);
 app.use("/campgrounds/:slug/reviews", reviewRoutes);
 app.use("/campgrounds", campgroundRoutes);
 
-var port = process.env.PORT;
-var ip = process.env.IP;
+const port = process.env.PORT;
+const ip = process.env.IP;
 app.listen(port, ip, function () {
     console.log("YelpCamp Server Started!");
 });

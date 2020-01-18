@@ -1,40 +1,43 @@
-var Campground = require("../models/campground");
-var Review = require("../models/review");
-var middlewareObj = {};
+const Campground = require("../models/campground"),
+    Review = require("../models/review");
 
-middlewareObj.checkCampgroundOwnership = function (req, res, next) {
-    // is user logged in?
-    if (req.isAuthenticated()) {
-        Campground.findOne({slug: req.params.slug}, function (err, foundCampground) {
+module.exports = {
+    isLoggedIn: (req, res, next) => {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        req.flash("error", "You need to be logged in!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
+        res.redirect("/login");
+    },
+
+    checkCampgroundOwnership: (req, res, next) => {
+        Campground.findOne({
+            slug: req.params.slug
+        }, (err, foundCampground) => {
             if (err || !foundCampground) { // error or foundcampground is null
                 req.flash("error", "Campground not found!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-                res.redirect("back");
-            } else {
+                res.redirect("/campgrounds");
+            } else if (foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) {
                 // does user own campground?
                 // console.log(foundCampground.author.id); // this is object (mongoose object)
                 // console.log(req.user._id); // this is String,so we can't use === but .equals
-                if (foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) {
-                    next();
-                } else {
-                    req.flash("error", "You don't have permission!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-                    res.redirect("back");
-                }
+                req.campground = foundCampground;
+                next();
+            } else {
+                req.flash("error", "You don't have permission!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
+                res.redirect(`/campgrounds/${req.params.slug}`);
             }
         });
-    } else {
-        req.flash("error", "You need to be logged in!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-        res.redirect("back")
-    }
-};
+    },
 
-middlewareObj.checkReviewOwnership = function (req, res, next) {
-    if (req.isAuthenticated()) {
-        Review.findById(req.params.review_id, function (err, foundReview) {
+    checkReviewOwnership: (req, res, next) => {
+        Review.findById(req.params.review_id, (err, foundReview) => {
             if (err || !foundReview) {
                 req.flash("error", "Review not found!");
                 res.redirect("back");
             } else {
                 if (foundReview.author.id.equals(req.user._id) || req.user.isAdmin) {
+                    req.review = foundReview;
                     next();
                 } else {
                     req.flash("error", "You don't have permission!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
@@ -42,43 +45,30 @@ middlewareObj.checkReviewOwnership = function (req, res, next) {
                 }
             }
         });
-    } else {
-        req.flash("error", "You need to be logged in!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-        res.redirect("back")
-    }
-};
+    },
 
-middlewareObj.checkReviewExistence = function (req, res, next) {
-    if (req.isAuthenticated()) {
-        Campground.findOne({slug: req.params.slug}).populate("reviews").exec(function (err, foundCampground) {
+    checkReviewExistence: (req, res, next) => {
+        Campground.findOne({
+            slug: req.params.slug
+        }).populate("reviews").exec((err, foundCampground) => {
             if (err || !foundCampground) {
                 req.flash("error", "Campground not found!");
                 res.redirect("back");
             } else {
                 // check if req.user._id exists in foundCampground.reviews
-                var foundUserReview = foundCampground.reviews.some(function (review) {
-                    return review.author.id.equals(req.user._id);
-                });
+                const foundUserReview = foundCampground.reviews.some(review => review.author.id.equals(req.user._id));
                 if (foundUserReview) {
                     req.flash("error", "You already wrote a review!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-                    res.redirect("back");
+                    return res.redirect(`/campgrounds/${foundCampground.slug}`);
                 }
+                if(foundCampground.author.id.equals(req.user._id)){
+                    req.flash("error", "You own this campground!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
+                    return res.redirect(`/campgrounds/${foundCampground.slug}`);
+                }
+                req.campground = foundCampground;
                 next();
             }
         });
-    } else {
-        req.flash("error", "You need to be logged in!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-        res.redirect("back")
     }
-};
 
-middlewareObj.isLoggedIn = function (req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    req.flash("error", "You need to be logged in!"); // we can add this before res.redirect or in the same line as res.render like: return res.render("register", {"error": err.message});
-    res.redirect("/login");
-};
-
-
-module.exports = middlewareObj;
+}

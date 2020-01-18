@@ -11,28 +11,28 @@
           <ul class="list-group list-group-flush">
             <% if (unreadNotifications && unreadNotifications.length>0) { %>
             <h3>New Notifications</h3>
-            <% unreadNotifications.forEach(function(notification) { %>
+            <% for (const notification of unreadNotifications) { %>
             <li class="list-group-item mb-3">
               <a href="/notifications/<%= notification.id %>">
                 <%= notification.username %> created a new campground %>
               </a>
               <p><small><%= notification.createdAt.toDateString() %></small></p>
             </li>
-            <% }); %>
+            <% } %>
             <% } %>
 
             <% if (notifications && notifications.length>0) { %>
             <h3>Old Notifications</h3>
             <% } %>
 
-            <% notifications.forEach(function(notification) { %>
+            <% for (const notification of notifications) { %>
             <li class="list-group-item mb-3">
               <a href="/campgrounds/<%= notification.campgroundSlug %>">
                 <%= notification.username %> created a new campground %>
               </a>
               <p><small><%= notification.createdAt.toDateString() %></small></p>
             </li>
-            <% }); %>
+            <% } %>
           </ul>
         </div>
       </div>
