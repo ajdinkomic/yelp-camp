@@ -40,6 +40,10 @@ const mongoose = require("mongoose"),
         followers: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
+        }],
+        favorites:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Campground"
         }]
     }, {
         timestamps: true
