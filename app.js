@@ -10,7 +10,8 @@ const express = require("express"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
-    User = require("./models/user");
+    User = require("./models/user"),
+    Campground = require("./models/campground");
 
 // Require routes
 const campgroundRoutes = require("./routes/campgrounds"),
@@ -46,7 +47,9 @@ app.use(async (req, res, next) => {
                     "_id": -1
                 }
             }).populate("favorites").exec();
+            let favoriteCamps = await Campground.find({"_id": user.favorites});
             res.locals.unreadNotifications = user.notifications;
+            res.locals.favoriteCamps = favoriteCamps;
         } catch (err) {
             console.log(err.message);
         }
