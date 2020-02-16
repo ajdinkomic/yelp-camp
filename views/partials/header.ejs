@@ -45,7 +45,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
                         id="navbarDropdownNotification" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                        aria-expanded="false" title="Notifications">
                         <i class="fas fa-bell"></i> <sup><span
                                 class="badge <%if (unreadNotifications.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadNotifications.length %></span></sup>
                     </a>
@@ -64,8 +64,30 @@
                             notifications</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
+                        id="navbarDropdownFavorites" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" title="Favorites">
+                        <i class="fas fa-heart"></i> 
+                        <sup><span class="badge <%if (unreadNotifications.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadNotifications.length %></span></sup>
+                    </a>
+                    <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownFavorites">
+                        <% if(unreadNotifications.length === 0){ %>
+                            <p class="text-white text-center"><em>No New Notifications</em></p>
+                        <% } %>
+                        <% unreadNotifications.forEach(function(notification){ %>
+                        <a class="dropdown-item btn btn-custom btn-no-border"
+                            href="/notifications/<%=notification.id%>"><em><%=notification.username%></em> created a new
+                            campground.</a>
+                            <p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
+                        <% }); %>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View past
+                            notifications</a>
+                    </div>
+                </li>
                 <li class=" nav-item"><a class="nav-link btn btn-custom px-lg-3 btn-no-border mr-lg-2 my-1"
-                        href="/campgrounds/new">New Camp</a>
+                        href="/campgrounds/new" title="New campground"><i class="fas fa-plus"></i></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mr-lg-2 my-1" href="#"
