@@ -1,6 +1,6 @@
 # YelpCamp
 
-### Working App on: [yelp-camp-ajdin](https://yelp-camp-ajdin.herokuapp.com)
+### Working App on: [yelp-camp-ajdin.herokuapp.com](https://yelp-camp-ajdin.herokuapp.com)
 For testing purposes use credentials:
 - username: **test**
 - password: **test**
@@ -16,7 +16,7 @@ This is a web application for exploring campgrounds around the world, based on C
 
 ### Information
 **Details:** Unregistered users can explore campgrounds, view information about specific campgrounds and their reviews. They can also view user profiles.
-After registration, users can post new campgrounds, leave reviews on other users' campgrounds and follow other users as well. When a user posts a new campground, all his followers get notified.
+After registration, users can post new campgrounds, leave reviews on other users' campgrounds and follow other users as well. When a user posts a new campground, all his followers get notified. Users can also mark a specific campground as their favorite, and receive notifications from their favorite campgrounds. It is also possible to contact the campground owner via in app messaging system.
 
 **Tools and technologies used:** Node.js, Express.js, MongoDB, MongoDB Atlas, HTML5, CSS3, Git, Heroku, Cloudinary.
 
@@ -38,6 +38,7 @@ After registration, users can post new campgrounds, leave reviews on other users
 - Follow user
 - Campground reviews
 - In app notifications
+- Favorite Campgrounds
 
 **Features To Implement:**
 - ~~Campground reviews~~
@@ -45,6 +46,6 @@ After registration, users can post new campgrounds, leave reviews on other users
 - Image gallery
 - In app messages
 - AJAX features
-- Favorite Campgrounds
+- ~~Favorite Campgrounds~~
 - Automatic image optimization with Cloudinary
 - Thumbnails (for index page) and full images (for show campground page)

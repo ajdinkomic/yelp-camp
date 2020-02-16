@@ -113,11 +113,22 @@ small:focus {
   color: orange;
 }
 
-.fa-heart{
+.card .fa-heart{
   position: absolute;
   right:0;
   padding: 0.5rem;
   background: rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+}
+
+.card .fa-heart:hover{
+  opacity: 1;
+  color: #dc3545;
+}
+
+.card .fa-heart.fas{
+  pointer-events: none;
+  opacity: 1;
 }
 
 /*************************************************

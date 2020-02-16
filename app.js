@@ -45,7 +45,7 @@ app.use(async (req, res, next) => {
                 sort: {
                     "_id": -1
                 }
-            }).exec();
+            }).populate("favorites").exec();
             res.locals.unreadNotifications = user.notifications;
         } catch (err) {
             console.log(err.message);

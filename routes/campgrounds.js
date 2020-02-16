@@ -235,6 +235,21 @@ router.put("/:slug", isLoggedIn, checkCampgroundOwnership, upload.single("image"
 
 });
 
+// ADD CAMPGROUND TO FAVORITES ROUTE
+router.get("/favorites/:slug", isLoggedIn, async (req, res) => {
+    try {
+        let campground = await Campground.findOne({
+            slug: req.params.slug
+        });
+        req.user.favorites.push(campground._id);
+        req.user.save();
+        res.redirect("/campgrounds");
+    } catch (err) {
+        req.flash("Campground could not be added to favorites!");
+        res.redirect("back");
+    }
+});
+
 // DESTROY CAMPGROUND ROUTE
 router.delete("/:slug", isLoggedIn, checkCampgroundOwnership, async (req, res) => {
     let campground = req.campground; // campground returned from checkCampgroundOwnership in middleware/index

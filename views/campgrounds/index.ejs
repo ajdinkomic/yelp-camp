@@ -38,10 +38,14 @@
                                 </form>
                             </div>
                         </div>
-                        <% } else { %> <% for(const campground of campgrounds){ %> <div class="col-lg-6 mb-4">
+                        <% } else { %> 
+                            <% for(const campground of campgrounds){ %> 
+                                <div class="col-lg-6 mb-4">
                                         <div class="card">
-                                            <a href="#"><i class="far fa-heart"></i></a>
-                                            <a href="/campgrounds/<%= campground.slug %>"><img
+                                            <% if(currentUser) { %>
+                                                <a href="/campgrounds/favorites/<%= campground.slug %>" title="Add to favorites"><i class="fa-heart <% if(currentUser.favorites.some(function(favorite){ return favorite.equals(campground.id) })) { %> fas text-danger <% } else{ %> far <% } %>"></i></a>
+                                            <% } %>
+                                                <a href="/campgrounds/<%= campground.slug %>"><img
                                                     src="<%= campground.image %>" class="card-img-top"
                                                     alt="<%=campground.name%> image."></a>
                                             <div class="card-body">
@@ -85,8 +89,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% } %>
-                                    <% } %>
+                                <% } %>
+                            <% } %>
                             </div>
                         </div>
                         </section>
@@ -145,14 +149,15 @@
                                                         href="/campgrounds">Home</a> | <a href="/campgrounds/new">New
                                                         Campground</a></span>
                                                 <p class="mt-2 mb-0">Developed by <a
-                                                        href="https://github.com/ajdinkomic" target="_blank">Ajdin
-                                                        Komic</a></p>
+                                                        href="https://github.com/ajdinkomic">Ajdin Komic</a></p>
                                             </div>
                                             </footer>
+
                                             <!-- jQuery CDN -->
                                             <script src="https://code.jquery.com/jquery-3.1.1.min.js"
                                                 integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
                                                 crossorigin="anonymous"></script>
+
                                             <!-- Bootstrap JS CDN -->
                                             <script
                                                 src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -160,15 +165,7 @@
                                                 crossorigin="anonymous">
                                             </script>
 
-                                            <!-- Custom JS - fa-heart on hover (favorite camp)
-                                            <script>
-                                                $(function() {
-                                                    $(".fa-heart").on("click", function() {
-                                                        $(this).removeClass("far");
-                                                        $(this).addClass("fas");
-                                                    });
-                                                });
-                                            </script> -->
+                                            <script src="/js/ajax.js"></script>
 
                                             </body>
 
