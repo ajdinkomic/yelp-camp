@@ -1,6 +1,11 @@
 /*=======================================
               GENERAL
 ========================================*/
+
+:root{
+  --green-color: #4eb980;
+}
+
 html,
 body {
   width: 100%;
@@ -25,7 +30,7 @@ input:focus {
 
 input:focus,
 .form-control:focus {
-  border-color: #4eb980;
+  border-color: var(--green-color);
   box-shadow: none;
 }
 
@@ -36,7 +41,7 @@ footer {
 
 a,
 a:hover {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 h1,
@@ -77,16 +82,16 @@ small:focus {
 }
 
 .btn-greenish {
-  color: #4eb980 !important;
+  color: var(--green-color) !important;
 }
 
 .btn-greenish-full {
   color: #fff !important;
-  background: #4eb980 !important;
+  background: var(--green-color) !important;
 }
 
 .btn-custom:hover {
-  background-color: #4eb980;
+  background-color: var(--green-color);
   color: #fff !important;
 }
 
@@ -215,7 +220,7 @@ small:focus {
 }
 
 .adventure {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 #landing-content {
@@ -268,13 +273,13 @@ small:focus {
   width: 5.5rem;
   height: 5.5rem;
   line-height: 5.5rem;
-  background: #4eb980;
+  background: var(--green-color);
   color: #fff;
   border-radius: 100%;
 }
 
 #sign-up-section {
-  background: #4eb980;
+  background: var(--green-color);
   color: #fff;
 }
 
@@ -323,7 +328,7 @@ small:focus {
 
 .page-link,
 .page-link:hover {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 .page-link:focus {
@@ -353,7 +358,7 @@ small:focus {
 }
 
 .all-campgrounds-container .list-group-item i {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 .all-campgrounds-container .list-group-item a {
@@ -416,7 +421,7 @@ small:focus {
 }
 
 #user-carousel .list-group-item i {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 #user-carousel .list-group-item a {
@@ -426,7 +431,7 @@ small:focus {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: #4eb980;
+  background-color: var(--green-color);
 }
 
 /*=======================================
