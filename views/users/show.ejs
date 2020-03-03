@@ -50,6 +50,11 @@
                     <%= user.username %>
                 </a>
                 <% } %>
+                <% if(currentUser && (currentUser.username !== user.username) && isFollower) { %>
+                <a href="/unfollow/<%= user.username %>" class="btn btn-secondary mt-3">Unfollow
+                    <%= user.username %>
+                </a>
+                <% } %>
             </div>
             <div class="col-md-8 border-left mt-3 mt-md-0 text-center">
                 <h4><%= user.firstName %>'s Campgrounds</h4>

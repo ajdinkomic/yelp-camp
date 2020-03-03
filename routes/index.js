@@ -138,6 +138,22 @@ router.get("/follow/:username", isLoggedIn, async (req, res) => {
     }
 });
 
+// unfollow user
+router.get("/unfollow/:username", isLoggedIn, async (req, res) => {
+    try {
+        let user = await User.findOne({
+            username: req.params.username
+        });
+        user.followers.remove(req.user._id);
+        user.save();
+        req.flash("success", `Successfully unfollowed ${user.username}`);
+        res.redirect(`/users/${req.params.username}`);
+    } catch (err) {
+        req.flash("error", err.message);
+        res.redirect("back");
+    }
+});
+
 // view all notifications
 router.get("/notifications", isLoggedIn, async (req, res) => {
     try {
