@@ -1,6 +1,11 @@
 /*=======================================
               GENERAL
 ========================================*/
+
+:root{
+  --green-color: #4eb980;
+}
+
 html,
 body {
   width: 100%;
@@ -25,7 +30,7 @@ input:focus {
 
 input:focus,
 .form-control:focus {
-  border-color: #4eb980;
+  border-color: var(--green-color);
   box-shadow: none;
 }
 
@@ -36,7 +41,7 @@ footer {
 
 a,
 a:hover {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 h1,
@@ -77,16 +82,16 @@ small:focus {
 }
 
 .btn-greenish {
-  color: #4eb980 !important;
+  color: var(--green-color) !important;
 }
 
 .btn-greenish-full {
   color: #fff !important;
-  background: #4eb980 !important;
+  background: var(--green-color) !important;
 }
 
 .btn-custom:hover {
-  background-color: #4eb980;
+  background-color: var(--green-color);
   color: #fff !important;
 }
 
@@ -111,24 +116,6 @@ small:focus {
 
 .checked-star {
   color: orange;
-}
-
-.card .fa-heart{
-  position: absolute;
-  right:0;
-  padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  opacity: 0.8;
-}
-
-.card .fa-heart:hover{
-  opacity: 1;
-  color: #dc3545;
-}
-
-.card .fa-heart.fas{
-  pointer-events: none;
-  opacity: 1;
 }
 
 /*************************************************
@@ -190,6 +177,10 @@ small:focus {
   object-fit: cover;
 }
 
+.navbar .dropdown-menu .dropdown-item img{
+  object-fit: cover;
+}
+
 /*************************************************
               LANDING
 *************************************************/
@@ -229,7 +220,7 @@ small:focus {
 }
 
 .adventure {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 #landing-content {
@@ -282,13 +273,13 @@ small:focus {
   width: 5.5rem;
   height: 5.5rem;
   line-height: 5.5rem;
-  background: #4eb980;
+  background: var(--green-color);
   color: #fff;
   border-radius: 100%;
 }
 
 #sign-up-section {
-  background: #4eb980;
+  background: var(--green-color);
   color: #fff;
 }
 
@@ -337,7 +328,7 @@ small:focus {
 
 .page-link,
 .page-link:hover {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 .page-link:focus {
@@ -355,11 +346,11 @@ small:focus {
 }
 
 .all-campgrounds-container .card {
-  height: 750px;
+  height: 36rem;
 }
 
 .all-campgrounds-container .card-img-top {
-  height: 300px;
+  height: 15rem;
 }
 
 .all-campgrounds-container .list-group-item {
@@ -367,12 +358,30 @@ small:focus {
 }
 
 .all-campgrounds-container .list-group-item i {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 .all-campgrounds-container .list-group-item a {
   color: #646464;
   font-weight: 400;
+}
+
+.card .fa-heart{
+  position: absolute;
+  right:0;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+}
+
+.card .fa-heart:hover{
+  opacity: 1;
+  color: #dc3545;
+}
+
+.card .fa-heart.fas{
+  pointer-events: none;
+  opacity: 1;
 }
 
 /*=======================================
@@ -398,13 +407,13 @@ small:focus {
 }
 
 #user-carousel .card {
-  height: 670px;
+  height: 32rem;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   width: 75%;
 }
 
 #user-carousel .card-img-top {
-  height: 300px;
+  height: 15rem;
 }
 
 #user-carousel .list-group-item {
@@ -412,7 +421,7 @@ small:focus {
 }
 
 #user-carousel .list-group-item i {
-  color: #4eb980;
+  color: var(--green-color);
 }
 
 #user-carousel .list-group-item a {
@@ -422,7 +431,7 @@ small:focus {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: #4eb980;
+  background-color: var(--green-color);
 }
 
 /*=======================================
@@ -507,10 +516,6 @@ small:focus {
     border-top: none;
     border-left: none;
   }
-
-  .all-campgrounds-container .card {
-    height: 650px;
-  }
 }
 
 
@@ -553,10 +558,6 @@ small:focus {
     border-top: none;
     border-left: none;
   }
-
-  .all-campgrounds-container .card {
-    height: 700px;
-  }
 }
 
 /* // Medium devices (tablets, less than 992px) */
@@ -580,7 +581,6 @@ small:focus {
   }
 
   .all-campgrounds-container .card {
-    height: 700px;
     width: 80%;
     margin: auto;
   }
@@ -592,9 +592,5 @@ small:focus {
   html,
   body {
     font-size: 15pt;
-  }
-
-  .all-campgrounds-container .card {
-    height: 720px;
   }
 }
