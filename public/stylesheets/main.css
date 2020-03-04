@@ -394,7 +394,7 @@ small:focus {
 }
 
 .show-campground-card img {
-  height: 27rem;
+  height: 25rem;
   object-fit: cover;
 }
 
@@ -413,7 +413,7 @@ small:focus {
 }
 
 #user-carousel .card-img-top {
-  height: 15rem;
+  height: 13rem;
 }
 
 #user-carousel .list-group-item {
@@ -469,6 +469,12 @@ small:focus {
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     margin-left: -7.5rem;
+  }
+}
+
+@media (max-width: 768px){
+  .show-campground-card img {
+    height: 20rem;
   }
 }
 
