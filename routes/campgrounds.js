@@ -243,9 +243,10 @@ router.get("/favorites/:slug", isLoggedIn, async (req, res) => {
         });
         req.user.favorites.push(campground._id);
         req.user.save();
+        req.flash("success", `${campground.name} added to favorites!`)
         res.redirect("/campgrounds");
     } catch (err) {
-        req.flash("Campground could not be added to favorites!");
+        req.flash("error", "Campground could not be added to favorites!");
         res.redirect("back");
     }
 });

@@ -414,7 +414,7 @@ small:focus {
 }
 
 #user-profile-section .user-info .user-icon-wrapper {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.08);
   border-radius: 100%;
   width: 150px;
   height: 150px;
@@ -489,6 +489,12 @@ small:focus {
 @media (max-width: 768px) {
   .show-campground-card img {
     height: 20rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .user-camps-wrapper{
+    border-left: 1px solid #dee2e6;
   }
 }
 
