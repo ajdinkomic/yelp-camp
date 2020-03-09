@@ -9,22 +9,22 @@
                 <form action="/register" method="POST">
                     <div class="form-group">
                         <label for="username">Username *</label>
-                        <input class="form-control" type="text" name="username" id="username" placeholder="Username"
+                        <input class="form-control" type="text" name="username" id="username" placeholder="username" pattern="^[a-z0-9_-]{4,10}$" title="Contains lowercase letters, numbers and _ or -. Minimum length: 4. Maximum length: 10."
                             required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password *</label>
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password"
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Passw0rd!" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" title="Must contain at least one uppercase letter, one lowercase letter, a number and a special character. Minimum length: 8."
                             required>
                     </div>
                     <div class="form-group">
                         <label for="firstName">First Name *</label>
-                        <input class="form-control" type="text" name="firstName" id="firstName" placeholder="First Name"
+                        <input class="form-control" type="text" name="firstName" id="firstName" placeholder="Firstname" pattern="[A-Za-z]{1,25}" title="Contains uppercase and lowercase letters. Minimum length: 1. Maximum length: 25."
                             required>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name *</label>
-                        <input class="form-control" type="text" name="lastName" id="lastName" placeholder="Last Name"
+                        <input class="form-control" type="text" name="lastName" id="lastName" placeholder="Lastname" pattern="[A-Za-z]{1,25}" title="Contains uppercase and lowercase letters. Minimum length: 1. Maximum length: 25."
                             required>
                     </div>
                     <div class="form-group">

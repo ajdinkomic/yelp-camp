@@ -1,7 +1,7 @@
 {
-  "name": "v1",
+  "name": "yelpcamp",
   "version": "1.0.0",
-  "description": "YelpCamp v10",
+  "description": "Aplication for exploring campgrounds all around the world.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,6 @@
     "body-parser": "^1.18.3",
     "cloudinary": "^1.17.0",
     "connect-flash": "^0.1.1",
-    "dotenv": "^8.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.16.2",
@@ -24,10 +23,12 @@
     "multer": "^1.4.2",
     "node-geocoder": "^3.25.0",
     "nodemailer": "^6.3.1",
-    "nodemon": "^2.0.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2"
+  }
 }
