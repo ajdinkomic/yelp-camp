@@ -2,10 +2,15 @@
 <section id="user-profile-section">
     <div class="container pb-4 bg-white">
         <div class="row align-items-center">
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center user-info">
 
-                <img src="<%=user.profilePhoto%>" alt="<%= user.username %> profile photo."
-                    style="width: 150px; height: 150px; border-radius: 100%;">
+                <% if(user.profileImage) { %>
+                <img src="<%=user.profileImage%>" alt="<%= user.username %> profile photo.">
+                <% } else { %>
+                <div class="user-icon-wrapper text-center m-auto">
+                    <i class="fas fa-user fa-5x p-3"></i>
+                </div>
+                <% } %>
 
                 <h3 class="mt-2"><%=user.firstName + " " + user.lastName%></h3>
 

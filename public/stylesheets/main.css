@@ -2,7 +2,7 @@
               GENERAL
 ========================================*/
 
-:root{
+:root {
   --green-color: #4eb980;
 }
 
@@ -177,7 +177,7 @@ small:focus {
   object-fit: cover;
 }
 
-.navbar .dropdown-menu .dropdown-item img{
+.navbar .dropdown-menu .dropdown-item img {
   object-fit: cover;
 }
 
@@ -366,20 +366,20 @@ small:focus {
   font-weight: 400;
 }
 
-.card .fa-heart{
+.card .fa-heart {
   position: absolute;
-  right:0;
+  right: 0;
   padding: 0.5rem;
   background: rgba(0, 0, 0, 0.2);
   opacity: 0.8;
 }
 
-.card .fa-heart:hover{
+.card .fa-heart:hover {
   opacity: 1;
   color: #dc3545;
 }
 
-.card .fa-heart.fas{
+.card .fa-heart.fas {
   pointer-events: none;
   opacity: 1;
 }
@@ -404,6 +404,20 @@ small:focus {
 
 #user-profile-section .container {
   padding-top: 7rem;
+}
+
+#user-profile-section .user-info img {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+#user-profile-section .user-info .user-icon-wrapper {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
 }
 
 #user-carousel .card {
@@ -472,7 +486,7 @@ small:focus {
   }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
   .show-campground-card img {
     height: 20rem;
   }

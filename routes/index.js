@@ -6,9 +6,37 @@ const express = require("express"),
     Notification = require("../models/notification"),
     Review = require("../models/review"),
     async = require("async"),
-    nodemailer = require("nodemailer"),
-    crypto = require("crypto"), 
-    {isLoggedIn} = require("../middleware");
+        multer = require("multer"),
+        cloudinary = require("cloudinary").v2,
+        nodemailer = require("nodemailer"),
+        crypto = require("crypto"), {
+            isLoggedIn
+        } = require("../middleware");
+
+// multer config
+const storage = multer.diskStorage({
+    filename: (req, file, callback) => {
+        callback(null, Date.now() + file.originalname);
+    }
+});
+const imageFilter = (req, file, cb) => {
+    // only accept images
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error("Only image files are allowed!"), false);
+    }
+    cb(null, true);
+}
+const upload = multer({
+    storage: storage,
+    fileFilter: imageFilter
+});
+
+// cloudinary config
+cloudinary.config({
+    cloud_name: "ajdinkomiccloud",
+    api_key: process.env.CLOUDINARY_API,
+    api_secret: process.env.CLOUDINARY_SECRET
+});
 
 // LANDING PAGE
 router.get("/", async (req, res) => {
@@ -39,18 +67,19 @@ router.get("/register", (req, res) => {
 });
 
 //handle sign up logic
-router.post("/register", (req, res) => {
-    let profilePhoto;
-    if (req.body.profilePhoto) {
-        profilePhoto = req.body.profilePhoto;
-    } else {
-        profilePhoto = "https://images.unsplash.com/photo-1455763916899-e8b50eca9967?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+router.post("/register", upload.single("image"), async (req, res) => {
+    let result, profileImage, profileImageId;
+    if (req.file) {
+        result = await cloudinary.uploader.upload(req.file.path);
+        profileImage = result.secure_url;
+        profileImageId = result.public_id;
     }
     const newUser = new User({
         username: req.body.username,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        profilePhoto: profilePhoto,
+        profileImage: profileImage,
+        profileImageId: profileImageId,
         email: req.body.email,
         facebook: req.body.facebook,
         youtube: req.body.youtube,

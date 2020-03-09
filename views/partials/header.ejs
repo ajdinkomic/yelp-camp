@@ -51,13 +51,13 @@
                     </a>
                     <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownNotification">
                         <% if(unreadNotifications.length === 0){ %>
-                            <p class="text-white text-center"><em>No New Notifications</em></p>
+                        <p class="text-white text-center"><em>No New Notifications</em></p>
                         <% } %>
                         <% unreadNotifications.forEach(function(notification){ %>
                         <a class="dropdown-item btn btn-custom btn-no-border"
                             href="/notifications/<%=notification.id%>"><em><%=notification.username%></em> created a new
                             campground.</a>
-                            <p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
+                        <p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
                         <% }); %>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View past
@@ -68,18 +68,19 @@
                     <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
                         id="navbarDropdownFavorites" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" title="Favorites">
-                        <i class="fas fa-heart"></i> 
+                        <i class="fas fa-heart"></i>
                         <sup><span class="badge rounded-circle"><%= favoriteCamps.length %></span></sup>
                     </a>
                     <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownFavorites">
                         <% if(favoriteCamps.length === 0){ %>
-                            <p class="text-white text-center"><em>No Favorite Camps yet</em></p>
+                        <p class="text-white text-center"><em>No Favorite Camps yet</em></p>
                         <% } %>
                         <% favoriteCamps.forEach(function(favoriteCamp){ %>
-                            
+
                         <a class="dropdown-item btn btn-custom btn-no-border"
                             href="/campgrounds/<%=favoriteCamp.slug%>">
-                            <img src="<%= favoriteCamp.image %>" alt="Campground image." width="50" height="50" class="mr-2">
+                            <img src="<%= favoriteCamp.image %>" alt="Campground image." width="50" height="50"
+                                class="mr-2">
                             <em><%=favoriteCamp.name%></em></a>
                         <% }); %>
                     </div>
@@ -91,17 +92,25 @@
                     <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mr-lg-2 my-1" href="#"
                         id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <img src="<%=currentUser.profilePhoto%>" class="user-profile-photo-nav mr-1"
-                            alt="User profile photo.">
+                        <% if(currentUser.profileImage) { %>
+                        <img src="<%=currentUser.profileImage%>" class="user-profile-photo-nav mr-1"
+                            alt="<%= currentUser.username %> profile image.">
+                        <% } else { %>
+                        <i class="fas fa-user mr-1"></i>
+                        <% } %>
                         <%= currentUser.username %>
                     </a>
                     <div class="dropdown-menu user-dropdown bg-dark px-2" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/users/<%=currentUser.username%>"><i class="fas fa-id-card mr-1"></i> Go to
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/users/<%=currentUser.username%>"><i
+                                class="fas fa-id-card mr-1"></i> Go to
                             profile</a>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="#"><i class="fas fa-user-edit mr-1"></i> Edit profile information</a>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/logout"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="#"><i
+                                class="fas fa-user-edit mr-1"></i> Edit profile information</a>
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/logout"><i
+                                class="fas fa-sign-out-alt mr-1"></i> Logout</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/campgrounds/new"><i class="fas fa-plus mr-1"></i> Add new
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/campgrounds/new"><i
+                                class="fas fa-plus mr-1"></i> Add new
                             campground</a>
                     </div>
                 </li>

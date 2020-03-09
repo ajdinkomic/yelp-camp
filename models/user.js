@@ -10,10 +10,8 @@ const mongoose = require("mongoose"),
         password: String,
         firstName: String,
         lastName: String,
-        profilePhoto: {
-            type: String,
-            default: "https://images.unsplash.com/photo-1572288623190-5bb8b0d81aa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-        },
+        profileImage: String,
+        profileImageId: String,
         email: {
             type: String,
             unique: true,
