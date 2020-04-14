@@ -46,7 +46,7 @@
                     for(const follower of user.followers){
                         if(follower.equals(currentUser._id)){
                             isFollower = true;
-                        }     
+                        }    
                     }
                 }     
                 %>
@@ -60,6 +60,27 @@
                     <%= user.username %>
                 </a>
                 <% } %>
+
+
+                <!-- Send user a message -->
+                <% if(currentUser && (currentUser.username !== user.username)) { %>
+                <a class="btn btn-custom btn-greenish-full mt-3" data-toggle="collapse" href="#messageCollapse" role="button" aria-expanded="false" aria-controls="messageCollapse">
+                    <i class="fas fa-inbox mr-1"></i>Send
+                    message
+                  </a>
+                  <div class="collapse mt-2" id="messageCollapse">
+                    <div class="card card-body">
+                      <form action="/message/<%= user.username %>" method="post">
+                        <div class="form-group text-left">
+                        <label for="messageBody"><strong>Message</strong></label>
+                        <textarea name="messageBody" id="messageBody" cols="30" rows="10" class="form-control" placeholder="Type your message here..."></textarea>
+                    </div>
+                      <input type="submit" class="btn btn-custom btn-greenish-full mt-3" value="Send"/>
+                    </form>
+                    </div>
+                  </div>
+                  <% } %>
+
             </div>
             <div class="col-md-8 user-camps-wrapper mt-3 mt-md-0 text-center">
                 <h4><%= user.firstName %>'s Campgrounds</h4>

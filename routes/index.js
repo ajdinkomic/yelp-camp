@@ -5,6 +5,7 @@ const express = require("express"),
     Campground = require("../models/campground"),
     Notification = require("../models/notification"),
     Review = require("../models/review"),
+    Message = require("../models/message"),
     async = require("async"),
         multer = require("multer"),
         cloudinary = require("cloudinary").v2,
@@ -221,6 +222,27 @@ router.get("/notifications/:id", isLoggedIn, async (req, res) => {
         notification.isRead = true;
         notification.save();
         res.redirect(`/campgrounds/${notification.campgroundSlug}`);
+    } catch (err) {
+        req.flash("error", err.message);
+        res.redirect("back");
+    }
+});
+
+// message user
+router.post("/message/:username", isLoggedIn, async(req,res) => {
+    try {
+        let user = await User.findOne({
+            username: req.params.username
+        });
+        const newMessage = {
+            sender: req.user._id,
+            body: req.body.messageBody
+        };
+        let message = await Message.create(newMessage);
+        user.messages.push(message);
+        user.save();
+        req.flash("success", `Successfully sent message to ${user.username}`);
+        res.redirect(`/users/${req.params.username}`);
     } catch (err) {
         req.flash("error", err.message);
         res.redirect("back");

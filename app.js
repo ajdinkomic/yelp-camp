@@ -46,9 +46,16 @@ app.use(async (req, res, next) => {
                 sort: {
                     "_id": -1
                 }
+            }).populate("messages", null, {
+                isRead: false
+            }, null, {
+                sort: {
+                    "_id": -1
+                }
             }).populate("favorites").exec();
             let favoriteCamps = await Campground.find({"_id": user.favorites});
             res.locals.unreadNotifications = user.notifications;
+            res.locals.unreadMessages = user.messages;
             res.locals.favoriteCamps = favoriteCamps;
         } catch (err) {
             console.log(err.message);

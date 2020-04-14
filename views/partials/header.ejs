@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YelpCamp</title>
+
+    <meta property="og:title" content="YelpCamp" />
+    <meta property="og:description"
+        content="YelpCamp is an application for exploring beautiful campgrounds worldwide. It offers a lot of great campgrounds for users to visit, review or post their own." />
+    <meta property="og:image" content="https://yelp-camp-ajdin.herokuapp.com/public/img/screenshot.png" />
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="YelpCamp">
+    <meta property="og:url" content="https://yelp-camp-ajdin.herokuapp.com/">
+
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -42,6 +51,31 @@
                         href="/register"><i class="fas fa-user-plus mr-1"></i> Sign Up</a>
                 </li>
                 <% } else { %>
+
+                <!-- Messages -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
+                        id="navbarDropdownMessage" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" title="Messages">
+                        <i class="fas fa-inbox"></i> <sup><span
+                                class="badge <%if (unreadMessages.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadMessages.length %></span></sup>
+                    </a>
+                    <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownMessage">
+                        <% if(unreadMessages.length === 0){ %>
+                        <p class="text-white text-center"><em>No New Messages</em></p>
+                        <% } %>
+                        <% unreadMessages.forEach(function(message){ %>
+                        <a class="dropdown-item btn btn-custom btn-no-border"
+                            href="/messages/<%=message.id%>"><em>New message from: <%=message.sender%></em>.</a>
+                        <p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
+                        <% }); %>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View past
+                            notifications</a>
+                    </div>
+                </li>
+
+                <!-- Notifications -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
                         id="navbarDropdownNotification" role="button" data-toggle="dropdown" aria-haspopup="true"

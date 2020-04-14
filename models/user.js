@@ -39,9 +39,13 @@ const mongoose = require("mongoose"),
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }],
-        favorites:[{
+        favorites: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Campground"
+        }],
+        messages: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Message"
         }]
     }, {
         timestamps: true
