@@ -1,7 +1,7 @@
 {
-  "name": "YelpCamp",
+  "name": "yelp-camp",
   "version": "1.0.0",
-  "description": "Aplication for exploring campgrounds all around the world.",
+  "description": "Web application for exploring campgrounds all around the world.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
