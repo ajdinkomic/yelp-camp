@@ -1,20 +1,25 @@
 # YelpCamp
 
 ### Working App on: [yelp-camp-ajdin.herokuapp.com](https://yelp-camp-ajdin.herokuapp.com)
+
 For testing purposes use credentials:
+
 - username: **test**
 - password: **test**
-or
+  or
 - username: **test2**
 - password: **test2**
 
 ### Home page screenshot
+
 ![Home page screenshot](/public/img/screenshot.png)
 
 ### Description
-This is a web application for exploring campgrounds around the world, based on Colt Steele's [*The Web Developer Bootcamp*](https://www.udemy.com/course/the-web-developer-bootcamp/) course on Udemy.
+
+This is a web application for exploring campgrounds around the world, based on Colt Steele's [_The Web Developer Bootcamp_](https://www.udemy.com/course/the-web-developer-bootcamp/) course on Udemy.
 
 ### Information
+
 **Details:** Unregistered users can explore campgrounds, view information about specific campgrounds and their reviews. They can also view user profiles.
 After registration, users can post new campgrounds, leave reviews on other users' campgrounds and follow other users as well. When a user posts a new campground, all his followers get notified. Users can also mark a specific campground as their favorite, and receive notifications from their favorite campgrounds. It is also possible to contact the campground owner via in app messaging system.
 
@@ -23,7 +28,9 @@ After registration, users can post new campgrounds, leave reviews on other users
 **Landing page design:** based on a template by [HTML5UP](https://html5up.net/alpha).
 
 ### Features
+
 **Implemented Features:**
+
 - Login / Sign Up
 - Admin role
 - Password reset
@@ -41,6 +48,7 @@ After registration, users can post new campgrounds, leave reviews on other users
 - Favorite Campgrounds
 
 **Features To Implement:**
+
 - ~~Campground reviews~~
 - ~~In app notifications~~
 - Image gallery
@@ -49,3 +57,5 @@ After registration, users can post new campgrounds, leave reviews on other users
 - ~~Favorite Campgrounds~~
 - Automatic image optimization with Cloudinary
 - Thumbnails (for index page) and full images (for show campground page)
+- Booking
+- Payment
