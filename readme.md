@@ -51,11 +51,12 @@ After registration, users can post new campgrounds, leave reviews on other users
 
 - ~~Campground reviews~~
 - ~~In app notifications~~
+- ~~Favorite Campgrounds~~
 - Image gallery
 - In app messages
 - AJAX features
-- ~~Favorite Campgrounds~~
 - Automatic image optimization with Cloudinary
 - Thumbnails (for index page) and full images (for show campground page)
 - Booking
 - Payment
+- Advanced search
