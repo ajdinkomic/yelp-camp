@@ -16,7 +16,7 @@ For testing purposes use credentials:
 
 ### Description
 
-This is a web application for exploring campgrounds around the world, based on Colt Steele's [_The Web Developer Bootcamp_](https://www.udemy.com/course/the-web-developer-bootcamp/) course on Udemy.
+This is a web application for exploring campgrounds around the world, based on Colt Steele's [_The Web Developer Bootcamp_](https://www.udemy.com/course/the-web-developer-bootcamp/) course on Udemy, but customized and with new features.
 
 ### Information
 
