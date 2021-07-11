@@ -1,169 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>YelpCamp</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>YelpCamp</title>
+		<meta property="og:title" content="YelpCamp" />
+		<meta
+			property="og:description"
+			content="YelpCamp is an application for exploring beautiful campgrounds worldwide. It offers a lot of great campgrounds for users to visit, review or post their own."
+		/>
+		<meta property="og:image" content="https://images.unsplash.com/photo-1496080174650-637e3f22fa03?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="YelpCamp" />
+		<meta property="og:url" content="https://yelp-camp-ajdin.herokuapp.com/" />
 
-    <meta property="og:title" content="YelpCamp" />
-    <meta property="og:description"
-        content="YelpCamp is an application for exploring beautiful campgrounds worldwide. It offers a lot of great campgrounds for users to visit, review or post their own." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1496080174650-637e3f22fa03?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="YelpCamp">
-    <meta property="og:url" content="https://yelp-camp-ajdin.herokuapp.com/">
+		<!-- Bootstrap 4 CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<!-- Font Awesome 5.11.2 -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+			integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+			crossorigin="anonymous"
+		/>
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,700&display=swap&subset=latin-ext" rel="stylesheet" />
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="/stylesheets/main.css" />
+	</head>
 
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Font Awesome 5.11.2 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-        integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,700&display=swap&subset=latin-ext"
-        rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/stylesheets/main.css">
-</head>
+	<body>
+		<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+			<a class="navbar-brand my-1" href="/">YelpCamp</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-<body>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link btn btn-custom btn-no-border ml-lg-2 my-1" href="/campgrounds">Home</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<% if(!currentUser){ %>
+					<li class="nav-item">
+						<a class="nav-link btn btn-custom btn-no-border ml-lg-2 my-1" href="/login">
+							<i class="fas fa-user mr-1"></i>
+							Log In
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link btn btn-custom btn-no-border px-lg-3 ml-lg-2 my-1" href="/register">
+							<i class="fas fa-user-plus mr-1"></i>
+							Sign Up
+						</a>
+					</li>
+					<% } else { %>
 
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand my-1" href="/">YelpCamp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+					<!-- Messages -->
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1"
+							href="#"
+							id="navbarDropdownMessage"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+							title="Messages"
+						>
+							<i class="fas fa-inbox"></i>
+							<sup><span class="badge <%if (unreadMessages.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadMessages.length %></span></sup>
+						</a>
+						<div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownMessage">
+							<% if(unreadMessages.length === 0){ %>
+							<p class="text-white text-center"><em>No New Messages</em></p>
+							<% } %> <% unreadMessages.forEach(function(message){ %>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/messages/<%=message.id%>">
+								<em>New message from: 
+                                    <%message.sender%>
+                                </em>
+								.
+							</a>
+							<p class="text-white text-right"><small><%=message.createdAt.toDateString()%></small></p>
+							<% }); %>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View all messages</a>
+						</div>
+					</li>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link btn btn-custom btn-no-border ml-lg-2 my-1" href="/campgrounds">Home</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <% if(!currentUser){ %>
-                <li class="nav-item"><a class="nav-link btn btn-custom btn-no-border ml-lg-2 my-1" href="/login"><i
-                            class="fas fa-user mr-1"></i> Log In</a></li>
-                <li class=" nav-item"><a class="nav-link btn btn-custom btn-no-border px-lg-3 ml-lg-2 my-1"
-                        href="/register"><i class="fas fa-user-plus mr-1"></i> Sign Up</a>
-                </li>
-                <% } else { %>
+					<!-- Notifications -->
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1"
+							href="#"
+							id="navbarDropdownNotification"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+							title="Notifications"
+						>
+							<i class="fas fa-bell"></i>
+							<sup><span class="badge <%if (unreadNotifications.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadNotifications.length %></span></sup>
+						</a>
+						<div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownNotification">
+							<% if(unreadNotifications.length === 0){ %>
+							<p class="text-white text-center"><em>No New Notifications</em></p>
+							<% } %> <% unreadNotifications.forEach(function(notification){ %>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/notifications/<%=notification.id%>">
+								<em><%=notification.username%></em>
+								created a new campground.
+							</a>
+							<p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
+							<% }); %>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View all notifications</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1"
+							href="#"
+							id="navbarDropdownFavorites"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+							title="Favorites"
+						>
+							<i class="fas fa-heart"></i>
+							<sup><span class="badge rounded-circle"><%= favoriteCamps.length %></span></sup>
+						</a>
+						<div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownFavorites">
+							<% if(favoriteCamps.length === 0){ %>
+							<p class="text-white text-center"><em>No Favorite Camps yet</em></p>
+							<% } %> <% favoriteCamps.forEach(function(favoriteCamp){ %>
 
-                <!-- Messages -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
-                        id="navbarDropdownMessage" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" title="Messages">
-                        <i class="fas fa-inbox"></i> <sup><span
-                                class="badge <%if (unreadMessages.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadMessages.length %></span></sup>
-                    </a>
-                    <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownMessage">
-                        <% if(unreadMessages.length === 0){ %>
-                        <p class="text-white text-center"><em>No New Messages</em></p>
-                        <% } %>
-                        <% unreadMessages.forEach(function(message){ %>
-                        <a class="dropdown-item btn btn-custom btn-no-border"
-                            href="/messages/<%=message.id%>"><em>New message from: <%=message.sender%></em>.</a>
-                        <p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
-                        <% }); %>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View past
-                            notifications</a>
-                    </div>
-                </li>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/campgrounds/<%=favoriteCamp.slug%>">
+								<img src="<%= favoriteCamp.image %>" alt="Campground image." width="50" height="50" class="mr-2" />
+								<em><%=favoriteCamp.name%></em>
+							</a>
+							<% }); %>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link btn btn-custom px-lg-3 btn-no-border mr-lg-2 my-1" href="/campgrounds/new" title="New campground"><i class="fas fa-plus"></i></a>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle btn btn-custom btn-no-border mr-lg-2 my-1"
+							href="#"
+							id="navbarDropdown"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+						>
+							<% if(currentUser.profileImage) { %>
+							<img src="<%=currentUser.profileImage%>" class="user-profile-photo-nav mr-1" alt="<%= currentUser.username %> profile image." />
+							<% } else { %>
+							<i class="fas fa-user mr-1"></i>
+							<% } %> <%= currentUser.username %>
+						</a>
+						<div class="dropdown-menu user-dropdown bg-dark px-2" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/users/<%=currentUser.username%>">
+								<i class="fas fa-id-card mr-1"></i>
+								Go to profile
+							</a>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="#">
+								<i class="fas fa-user-edit mr-1"></i>
+								Edit profile information
+							</a>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/logout">
+								<i class="fas fa-sign-out-alt mr-1"></i>
+								Logout
+							</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item btn btn-custom btn-no-border" href="/campgrounds/new">
+								<i class="fas fa-plus mr-1"></i>
+								Add new campground
+							</a>
+						</div>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+		</nav>
 
-                <!-- Notifications -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
-                        id="navbarDropdownNotification" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" title="Notifications">
-                        <i class="fas fa-bell"></i> <sup><span
-                                class="badge <%if (unreadNotifications.length >0) { %>badge-danger<% } %> rounded-circle"><%= unreadNotifications.length %></span></sup>
-                    </a>
-                    <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownNotification">
-                        <% if(unreadNotifications.length === 0){ %>
-                        <p class="text-white text-center"><em>No New Notifications</em></p>
-                        <% } %>
-                        <% unreadNotifications.forEach(function(notification){ %>
-                        <a class="dropdown-item btn btn-custom btn-no-border"
-                            href="/notifications/<%=notification.id%>"><em><%=notification.username%></em> created a new
-                            campground.</a>
-                        <p class="text-white text-right"><small><%=notification.createdAt.toDateString()%></small></p>
-                        <% }); %>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/notifications">View past
-                            notifications</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mx-lg-2 my-1" href="#"
-                        id="navbarDropdownFavorites" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" title="Favorites">
-                        <i class="fas fa-heart"></i>
-                        <sup><span class="badge rounded-circle"><%= favoriteCamps.length %></span></sup>
-                    </a>
-                    <div class="dropdown-menu bg-dark px-md-2" aria-labelledby="navbarDropdownFavorites">
-                        <% if(favoriteCamps.length === 0){ %>
-                        <p class="text-white text-center"><em>No Favorite Camps yet</em></p>
-                        <% } %>
-                        <% favoriteCamps.forEach(function(favoriteCamp){ %>
-
-                        <a class="dropdown-item btn btn-custom btn-no-border"
-                            href="/campgrounds/<%=favoriteCamp.slug%>">
-                            <img src="<%= favoriteCamp.image %>" alt="Campground image." width="50" height="50"
-                                class="mr-2">
-                            <em><%=favoriteCamp.name%></em></a>
-                        <% }); %>
-                    </div>
-                </li>
-                <li class=" nav-item"><a class="nav-link btn btn-custom px-lg-3 btn-no-border mr-lg-2 my-1"
-                        href="/campgrounds/new" title="New campground"><i class="fas fa-plus"></i></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle btn btn-custom btn-no-border mr-lg-2 my-1" href="#"
-                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <% if(currentUser.profileImage) { %>
-                        <img src="<%=currentUser.profileImage%>" class="user-profile-photo-nav mr-1"
-                            alt="<%= currentUser.username %> profile image.">
-                        <% } else { %>
-                        <i class="fas fa-user mr-1"></i>
-                        <% } %>
-                        <%= currentUser.username %>
-                    </a>
-                    <div class="dropdown-menu user-dropdown bg-dark px-2" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/users/<%=currentUser.username%>"><i
-                                class="fas fa-id-card mr-1"></i> Go to
-                            profile</a>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="#"><i
-                                class="fas fa-user-edit mr-1"></i> Edit profile information</a>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/logout"><i
-                                class="fas fa-sign-out-alt mr-1"></i> Logout</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-custom btn-no-border" href="/campgrounds/new"><i
-                                class="fas fa-plus mr-1"></i> Add new
-                            campground</a>
-                    </div>
-                </li>
-                <% } %>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container-fluid flashalert text-center">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <% if(errorMessage && errorMessage.length > 0){ %>
-                <!-- empty array isn't false so we need to make sure message does exist and it isn't an empty array (its length so must be > 0) -->
-                <div class="alert alert-danger" role="alert"><%= errorMessage %></div>
-                <% } %>
-                <% if(successMessage && successMessage.length > 0){ %>
-                <!-- empty array isn't false so we need to make sure message does exist and it isn't an empty array (its length so must be > 0) -->
-                <div class="alert alert-success" role="alert"><%= successMessage %></div>
-                <% } %>
-            </div>
-        </div>
-    </div>
+		<div class="container-fluid flashalert text-center">
+			<div class="row justify-content-center">
+					<% if(errorMessage && errorMessage.length > 0){ %>
+					<!-- empty array isn't false so we need to make sure message does exist and it isn't an empty array (its length so must be > 0) -->
+					<div class="alert alert-danger w-100" role="alert"><%= errorMessage %></div>
+					<% } %> <% if(successMessage && successMessage.length > 0){ %>
+					<!-- empty array isn't false so we need to make sure message does exist and it isn't an empty array (its length so must be > 0) -->
+					<div class="alert alert-success w-100" role="alert"><%= successMessage %></div>
+					<% } %>
+			</div>
+		</div>
+	</body>
+</html>
